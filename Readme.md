@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Романова Наталья](https://up.htmlacademy.ru/react/6/user/1675043).
-* Наставник: `Артем Макаров`.
+* Наставник: [Артем Макаров](https://htmlacademy.ru/profile/deepsick).
 
 ---
 
