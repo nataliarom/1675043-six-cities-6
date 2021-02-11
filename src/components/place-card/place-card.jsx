@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PlaceCard = ({name, price, mark, type, image}) => {
 
   return (
-    <React.Fragment>
+    <>
       <article className="cities__place-card place-card">
         {mark ? <div className="place-card__mark"><span>{mark}</span></div> : ``}
         <div className="cities__image-wrapper place-card__image-wrapper">
@@ -37,7 +37,7 @@ const PlaceCard = ({name, price, mark, type, image}) => {
           <p className="place-card__type">{type}</p>
         </div>
       </article>
-    </React.Fragment>
+    </>
   );
 };
 PlaceCard.propTypes = {

@@ -6,7 +6,7 @@ const App = ({placesCount, places}) => {
 
 
   return (
-    <React.Fragment>
+    <>
       <div className="page page--gray page--main">
         <header className="header">
           <div className="container">
@@ -91,7 +91,7 @@ const App = ({placesCount, places}) => {
                 </form>
                 <div className="cities__places-list places__list tabs__content">
 
-                  {/* eslint-disable-next-line react/prop-types */}
+
                   {places.map((place) => <PlaceCard
                     name={place.name}
                     mark={place.mark}
@@ -99,6 +99,7 @@ const App = ({placesCount, places}) => {
                     image={place.image}
                     type={place.type}
                     key={place.id}
+                    id={place.id}
                   />)}
 
                 </div>
@@ -110,18 +111,19 @@ const App = ({placesCount, places}) => {
           </div>
         </main>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 
 App.propTypes = {
   placesCount: PropTypes.number.isRequired,
-  places: PropTypes.shape({
+  places: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     mark: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired
-  })
+    type: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  }))
 };
 export default App;
