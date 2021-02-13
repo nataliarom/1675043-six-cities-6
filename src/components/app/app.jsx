@@ -5,7 +5,7 @@ import Main from '../main/main';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Room from '../room/room';
-import PageNotFound from '../404/404';
+import PageNotFound from '../page-not-found/page-not-found';
 
 
 const App = ({placesCount, places}) => {
