@@ -1,29 +1,31 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes, {arrayOf} from 'prop-types';
 import Main from '../main/main';
 import SignIn from '../sign-in/sign-in';
-import Favorites from '../favorites/favorites';
+import FavoritesPage from '../favorites-page/favorites-page';
 import Room from '../room/room';
 import PageNotFound from '../page-not-found/page-not-found';
+import {OfferProps} from "../../types/offer-props";
 
 
-const App = ({placesCount, places}) => {
+const App = ({offersCount, offers}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main placesCount={placesCount} places={places} />
+          <Main offersCount={offersCount} offers={offers} />
         </Route>
         <Route exact path="/login">
           <SignIn />
         </Route>
         <Route exact path="/favorites">
-          <Favorites />
+          <FavoritesPage favoriteOffers={offers}/>
         </Route>
         <Route exact path="/offer/:id"
           render = {({match})=>(
-            <Room id={match.params.id}/>)
+            Number(match.params.id) ? <Room id={Number(match.params.id)}/> : <PageNotFound />
+          )
           }
         />
         <Route>
@@ -36,14 +38,7 @@ const App = ({placesCount, places}) => {
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    mark: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
-  }))
+  offersCount: PropTypes.number.isRequired,
+  offers: arrayOf(OfferProps.isRequired)
 };
 export default App;
