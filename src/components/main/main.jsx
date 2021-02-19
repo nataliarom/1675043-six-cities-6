@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import PlaceCard from "../place-card/place-card";
+import OffersList from "../offers-list/offers-list";
+import {Link} from 'react-router-dom';
 
-const Main = ({placesCount, places}) => {
+const Main = ({offersCount, offers}) => {
 
 
   return (
@@ -12,18 +13,18 @@ const Main = ({placesCount, places}) => {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <a className="header__logo-link header__logo-link--active">
+                <Link className="header__logo-link header__logo-link--active" to="/">
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </a>
+                </Link>
               </div>
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
+                    <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -73,11 +74,11 @@ const Main = ({placesCount, places}) => {
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+                <b className="places__found">{offersCount} places to stay in Amsterdam</b>
                 <form className="places__sorting" action="#" method="get">
                   <span className="places__sorting-caption">Sort by</span>
                   <span className="places__sorting-type" tabIndex="0">
-                  Popular<svg className="places__sorting-arrow" width="7" height="4"><use xlinkHref="#icon-arrow-select"></use></svg></span>
+                  Popular<svg className="places__sorting-arrow" width="7" height="4"><use xlinkHref="#icon-arrow-select"/></svg></span>
                   <ul className="places__options places__options--custom places__options--opened">
                     <li className="places__option places__option--active" tabIndex="0">Popular</li>
                     <li className="places__option" tabIndex="0">Price: low to high</li>
@@ -85,17 +86,9 @@ const Main = ({placesCount, places}) => {
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
                 </form>
-                <div className="cities__places-list places__list tabs__content">
-                  {places.map((place) => <PlaceCard
-                    name={place.name}
-                    mark={place.mark}
-                    price={place.price}
-                    image={place.image}
-                    type={place.type}
-                    key={place.id}
-                    id={place.id}
-                  />)}
-                </div>
+                <OffersList
+                  offers={offers}
+                />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"/>
@@ -109,14 +102,15 @@ const Main = ({placesCount, places}) => {
 };
 
 Main.propTypes = {
-  placesCount: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    mark: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+  offersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired),
+    previewImage: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired
   }))
 };
 export default Main;
