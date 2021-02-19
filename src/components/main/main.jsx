@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import {Link} from 'react-router-dom';
+import PropTypes from "prop-types";
+import {OfferCardProps} from "../../types/offer-card-props";
 
 const Main = ({offersCount, offers}) => {
-
-
   return (
     <>
       <div className="page page--gray page--main">
@@ -103,14 +102,8 @@ const Main = ({offersCount, offers}) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    previewImage: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired
-  }))
+  offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps))
 };
+
+
 export default Main;

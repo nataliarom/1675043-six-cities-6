@@ -1,8 +1,9 @@
 
 import React from 'react';
-import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
+import {FavoriteOfferCardProps} from "../../types/favorite-offer-card-props";
+import PropTypes from "prop-types";
 
 const FavoritesPage = ({favoriteOffers}) => {
 
@@ -113,12 +114,7 @@ const FavoritesPage = ({favoriteOffers}) => {
     </>);
 };
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    images: PropTypes.arrayOf(PropTypes.string.isRequired),
-    previewImage: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired}))
+  favoriteOffers: PropTypes.arrayOf(PropTypes.shape(FavoriteOfferCardProps))
 };
+
 export default FavoritesPage;
