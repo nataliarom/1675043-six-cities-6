@@ -3,6 +3,8 @@ import OffersList from "../offers-list/offers-list";
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {OfferCardProps} from "../../types/offer-card-props";
+import Map from "../map/map";
+import {DEFAULT_CITY, HOTEL_OFFERS} from "../../mocks/offers.js";
 
 const Main = ({offersCount, offers}) => {
   return (
@@ -90,7 +92,7 @@ const Main = ({offersCount, offers}) => {
                 />
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"/>
+                <Map city={DEFAULT_CITY} points={HOTEL_OFFERS.map((v)=>[v.city.location.latitude, v.city.location.longitude])} />
               </div>
             </div>
           </div>

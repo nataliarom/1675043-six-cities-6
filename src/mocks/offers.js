@@ -1,12 +1,20 @@
 
 export const HOTEL_OFFERS_COUNT = 312;
+
+export const DEFAULT_CITY =
+  {
+    name: `Amsterdam`,
+    coordinates: [52.38333, 4.9],
+    zoom: 12
+  };
+
 export const HOTEL_OFFERS = [
   {
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
         zoom: 10
       },
       name: `Amsterdam`
@@ -40,8 +48,8 @@ export const HOTEL_OFFERS = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.369553943508,
+        longitude: 4.85309666406198,
         zoom: 10
       },
       name: `Amsterdam`
@@ -58,8 +66,8 @@ export const HOTEL_OFFERS = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8
     },
     maxAdults: 4,
@@ -109,8 +117,8 @@ export const HOTEL_OFFERS = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
         zoom: 10
       },
       name: `Amsterdam`
@@ -139,36 +147,3 @@ export const HOTEL_OFFERS = [
     title: `Canal View Prinsengracht`,
     type: `Apartment`
   }];
-
-/* PLACES: [
-
-  {
-    name: `Wood and stone place`,
-    mark: ``,
-    price: `€80`,
-    image: `img/room.jpg`,
-    id: `200`,
-    type: `Private room`},
-  {
-    name: `Canal View Prinsengracht`,
-    mark: ``,
-    price: `€132`,
-    image: `img/room.jpg`,
-    id: `300`,
-    type: `Apartment`},
-  {
-    name: `Nice, cozy, warm big bed apartment`,
-    mark: `Premium`,
-    price: `€180`,
-    image: `img/apartment-03.jpg`,
-    id: `400`,
-    type: `Apartment`
-  },
-  {
-    name: `Wood and stone place`,
-    mark: ``,
-    price: `€80`,
-    image: `img/room.jpg`,
-    id: `500`,
-    type: `Private room`
-  },*/
