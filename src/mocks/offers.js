@@ -1,23 +1,16 @@
 
 export const HOTEL_OFFERS_COUNT = 312;
 
-export const DEFAULT_CITY =
-  {
-    name: `Amsterdam`,
-    coordinates: [52.38333, 4.9],
-    zoom: 12
-  };
-
 export const HOTEL_OFFERS = [
   {
     bedrooms: 3,
     city: {
+      name: `Paris`,
       location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
-        zoom: 10
-      },
-      name: `Amsterdam`
+        latitude: 52.38333,
+        longitude: 4.9,
+        zoom: 12
+      }
     },
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
