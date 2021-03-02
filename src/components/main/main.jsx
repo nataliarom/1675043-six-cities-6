@@ -70,7 +70,6 @@ const Main = ({offers}) => {
 };
 
 Main.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps))
 };
 

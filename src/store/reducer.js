@@ -1,14 +1,16 @@
 
 import {ActionType} from './action';
-import {DEFAULT_CITY, CITIES_LIST} from "../const";
+import {DEFAULT_CITY, CITIES} from "../const";
 import {getOffersFilteredByCity} from "../offers-processing";
 import {HOTEL_OFFERS} from "../mocks/offers";
 
 const initialState = {
   city: DEFAULT_CITY,
   offers: getOffersFilteredByCity(HOTEL_OFFERS, DEFAULT_CITY),
-  offersCount: getOffersFilteredByCity(HOTEL_OFFERS, DEFAULT_CITY).length,
-  cities: CITIES_LIST
+  get offersCount() {
+    return this.offers.length;
+  },
+  cities: CITIES
 };
 
 const reducer = (state = initialState, action) => {

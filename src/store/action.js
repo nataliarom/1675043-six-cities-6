@@ -1,4 +1,4 @@
-import {CITIES_LIST} from "../const";
+import {CITIES} from "../const";
 
 
 export const ActionType = {
@@ -10,10 +10,10 @@ export const ActionType = {
 export const ActionCreator = {
   setCity: (city, index) => ({
     type: ActionType.SET_CITY,
-    payload: CITIES_LIST[index],
+    payload: CITIES[index],
   }),
   updateOffersList: (city, index) => ({
     type: ActionType.UPDATE_OFFERS_LIST,
-    payload: CITIES_LIST[index],
+    payload: CITIES[index],
   })
 };

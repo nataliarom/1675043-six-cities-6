@@ -1,6 +1,6 @@
 
 
-export const CITIES_LIST = [
+export const CITIES = [
   {
     name: `Paris`,
     location: {
@@ -50,4 +50,4 @@ export const CITIES_LIST = [
     }
   }];
 
-export const DEFAULT_CITY = CITIES_LIST[0];
+export const DEFAULT_CITY = CITIES[0];

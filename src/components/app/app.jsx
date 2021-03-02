@@ -9,12 +9,12 @@ import PageNotFound from '../page-not-found/page-not-found';
 import {OfferProps} from "../../types/offer-props";
 
 
-const App = ({offersCount, offers}) => {
+const App = ({offers}) => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <Main offersCount={offersCount} offers={offers} />
+          <Main offers={offers}/>
         </Route>
         <Route exact path="/login">
           <SignIn />
