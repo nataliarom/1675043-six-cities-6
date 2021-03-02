@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from "../offer-card/offer-card";
 import {OfferCardProps} from "../../types/offer-card-props";
+import {connect} from 'react-redux';
 
 const OffersList = ({offers}) => {
 
@@ -34,7 +35,17 @@ const OffersList = ({offers}) => {
 
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    offers: state.offers
+  };
+};
+
+
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps))
 };
-export default OffersList;
+
+export {OffersList};
+export default connect(mapStateToProps)(OffersList);
