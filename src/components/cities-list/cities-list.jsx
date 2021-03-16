@@ -39,9 +39,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   onCitySelect(city, index) {
     dispatch(ActionCreator.setCity(city, index));
-    dispatch(ActionCreator.updateOffersList(city, index));
+    dispatch(ActionCreator.loadCityOffers(city, index));
   },
 });
+
 
 export {CitiesList};
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

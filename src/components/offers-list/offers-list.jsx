@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps))
+  offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps)).isRequired
 };
 
 export {OffersList};
