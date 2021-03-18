@@ -1,33 +1,31 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import PropTypes, {arrayOf} from 'prop-types';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import Main from '../main/main';
-import SignIn from '../sign-in/sign-in';
+import SignIn from '../sign-in-screen/sign-in-screen';
 import FavoritesPage from '../favorites-page/favorites-page';
 import Room from '../room/room';
 import PageNotFound from '../page-not-found/page-not-found';
-import {OfferProps} from "../../types/offer-props";
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from "../../browser-history";
+import {AppRoute} from "../../const";
 
-
-const App = ({offers}) => {
+const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path="/">
-          <Main offers={offers}/>
-        </Route>
-        <Route exact path="/login">
+        <Route exact path={AppRoute.ROOT}
+          render={() =>(
+            <Main/>)}
+        />
+        <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
-        <Route exact path="/favorites">
-          <FavoritesPage favoriteOffers={offers}/>
-        </Route>
-        <Route exact path="/offer/:id"
+        <PrivateRoute exact path={AppRoute.FAVORITES}
+          render={()=><FavoritesPage favoriteOffers={[]} />}/>
+        <Route exact path={AppRoute.OFFER}
           render = {({match})=>(
             Number(match.params.id) ? <Room id={Number(match.params.id)}/> : <PageNotFound />
-          )
-          }
-        />
+          )}/>
         <Route>
           <PageNotFound />
         </Route>
@@ -37,8 +35,4 @@ const App = ({offers}) => {
   );
 };
 
-App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
-  offers: arrayOf(OfferProps.isRequired)
-};
 export default App;

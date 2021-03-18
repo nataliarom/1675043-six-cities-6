@@ -1,16 +1,18 @@
 
 import {ActionType} from './action';
-import {DEFAULT_CITY, CITIES} from "../const";
-import {getOffersFilteredByCity} from "../offers-processing";
-import {HOTEL_OFFERS} from "../mocks/offers";
+import {DEFAULT_CITY, CITIES, AuthorizationStatus} from "../const";
+import {getOffersFilteredByCity} from "../utils";
+
 
 const initialState = {
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authInfo: null,
   city: DEFAULT_CITY,
-  offers: getOffersFilteredByCity(HOTEL_OFFERS, DEFAULT_CITY),
-  get offersCount() {
-    return this.offers.length;
-  },
-  cities: CITIES
+  hotels: [],
+  offers: [],
+  offersCount: 0,
+  cities: CITIES,
+  isDataLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,12 +22,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: action.payload
       };
-    case ActionType.UPDATE_OFFERS_LIST:
-      const offers = getOffersFilteredByCity(HOTEL_OFFERS, action.payload);
+    case ActionType.UPDATE_CITY_OFFERS:
+      const offers = getOffersFilteredByCity(state.hotels, action.payload);
       return {
         ...state,
         offers,
         offersCount: offers.length
+      };
+    case ActionType.UNAUTHORIZE:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+        authInfo: null
+      };
+    case ActionType.LOAD_HOTELS:
+      return {
+        ...state,
+        hotels: action.payload,
+        isDataLoaded: true
+      };
+    case ActionType.AUTHORIZE:
+      return {
+        ...state,
+        authInfo: action.payload,
+        authorizationStatus: AuthorizationStatus.AUTH
       };
   }
 
