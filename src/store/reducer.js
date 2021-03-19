@@ -12,7 +12,8 @@ const initialState = {
   offers: [],
   offersCount: 0,
   cities: CITIES,
-  isDataLoaded: false
+  isDataLoaded: false,
+  activeOfferId: -1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +47,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         authInfo: action.payload,
         authorizationStatus: AuthorizationStatus.AUTH
+      };
+    case ActionType.SET_ACTIVE_OFFER:
+      return {
+        ...state,
+        activeOfferId: action.payload
       };
   }
 

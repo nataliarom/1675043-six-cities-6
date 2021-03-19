@@ -1,4 +1,5 @@
 
+// TODO get cities list from server
 
 export const CITIES = [
   {

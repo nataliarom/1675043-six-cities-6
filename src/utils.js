@@ -5,7 +5,7 @@ const processVal = (val) => {
     return Array.isArray(val) ? val.map(processVal) : renameKeys(val);
   }
 };
-
+// TODO mapping instead
 export const renameKeys = (obj) => Object.fromEntries(
     Object.entries(obj)
     .map(([key, val]) => [

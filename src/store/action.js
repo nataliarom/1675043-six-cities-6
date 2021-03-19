@@ -10,6 +10,7 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `app/redirectToRoute`,
   AUTHORIZE: `user/authorize`,
   UNAUTHORIZE: `user/unauthorize`,
+  SET_ACTIVE_OFFER: `offer/setActive`
 };
 
 export const ActionCreator = {
@@ -19,11 +20,7 @@ export const ActionCreator = {
   }),
   loadCityOffers: (city, index) => ({
     type: ActionType.UPDATE_CITY_OFFERS,
-    payload: index ? CITIES[index] : CITIES.find((c)=> c === city),
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
+    payload: index ? CITIES[index] : CITIES.find((c) => c === city),
   }),
   authorize: (authInfo) => ({
     type: ActionType.AUTHORIZE,
@@ -39,5 +36,9 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  setActiveOffer: (offerId) => ({
+    type: ActionType.SET_ACTIVE_OFFER,
+    payload: offerId,
   })
 };
