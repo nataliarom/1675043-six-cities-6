@@ -1,17 +1,17 @@
 
 import {ActionType} from './action';
-import {DEFAULT_CITY, CITIES, AuthorizationStatus} from "../const";
+import {AuthorizationStatus} from "../const";
 import {getOffersFilteredByCity} from "../utils";
 
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: null,
-  city: DEFAULT_CITY,
+  city: undefined,
   hotels: [],
   offers: [],
   offersCount: 0,
-  cities: CITIES,
+  cities: [],
   isDataLoaded: false,
   activeOfferId: -1,
 };
@@ -19,17 +19,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY:
-      return {
-        ...state,
-        city: action.payload
-      };
-    case ActionType.UPDATE_CITY_OFFERS:
       const offers = getOffersFilteredByCity(state.hotels, action.payload);
       return {
         ...state,
         offers,
-        offersCount: offers.length
+        offersCount: offers.length,
+        city: action.payload,
       };
+
     case ActionType.UNAUTHORIZE:
       return {
         ...state,
@@ -41,6 +38,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         hotels: action.payload,
         isDataLoaded: true
+      };
+    case ActionType.LOAD_CITIES:
+      return {
+        ...state,
+        cities: action.payload,
       };
     case ActionType.AUTHORIZE:
       return {

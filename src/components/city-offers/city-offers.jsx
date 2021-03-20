@@ -29,7 +29,7 @@ const CityOffers = ({city, offersCount}) => {
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">We could not find any property available at the moment in
-              {city.name} </p>
+              {city && city.name} </p>
           </div>
         </section>
         <div className="cities__right-section page page__main--index-empty">
@@ -40,7 +40,7 @@ const CityOffers = ({city, offersCount}) => {
 
 CityOffers.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  city: PropTypes.shape(CityProps).isRequired,
+  city: PropTypes.shape(CityProps),
 };
 
 const mapStateToProps = (state) => {

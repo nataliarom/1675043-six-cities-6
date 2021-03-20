@@ -18,3 +18,13 @@ export const getOffersFilteredByCity = (allOffers, city) => {
     return offer.city.name === city.name;
   });
 };
+// TODO refactor getCitiesFromOffersLis
+export const getCitiesFromOffersList = (allOffers) => {
+  let cities = [];
+  allOffers.forEach((offer)=> {
+    if (cities.findIndex((c) => c.name === offer.city.name) < 0) {
+      cities.push(offer.city);
+    }
+  });
+  return cities;
+};

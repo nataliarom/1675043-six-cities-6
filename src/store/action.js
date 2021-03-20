@@ -1,12 +1,10 @@
-import {CITIES} from "../const";
-
 
 export const ActionType = {
   SET_CITY: `city/set`,
-  UPDATE_CITY_OFFERS: `offer/updateList`,
   UPDATE_OFFERS_COUNT: `offer/updateCount`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_HOTELS: `hotels/load`,
+  LOAD_CITIES: `cities/load`,
   REDIRECT_TO_ROUTE: `app/redirectToRoute`,
   AUTHORIZE: `user/authorize`,
   UNAUTHORIZE: `user/unauthorize`,
@@ -14,13 +12,9 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  setCity: (city, index) => ({
+  setCity: (city) => ({
     type: ActionType.SET_CITY,
-    payload: CITIES[index],
-  }),
-  loadCityOffers: (city, index) => ({
-    type: ActionType.UPDATE_CITY_OFFERS,
-    payload: index ? CITIES[index] : CITIES.find((c) => c === city),
+    payload: city,
   }),
   authorize: (authInfo) => ({
     type: ActionType.AUTHORIZE,
@@ -32,6 +26,10 @@ export const ActionCreator = {
   loadHotels: (hotels) => ({
     type: ActionType.LOAD_HOTELS,
     payload: hotels,
+  }),
+  loadCities: (cities) => ({
+    type: ActionType.LOAD_CITIES,
+    payload: cities,
   }),
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
