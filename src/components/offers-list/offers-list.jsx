@@ -4,13 +4,14 @@ import OfferCard from "../offer-card/offer-card";
 import {OfferCardProps} from "../../types/offer-card-props";
 import {connect} from 'react-redux';
 import {ActionCreator} from "../../store/action";
+import {COMPARE_FUNCTIONS} from "../../const";
 
-const OffersList = ({offers, onActiveCardSelection}) => {
+
+const OffersList = ({offers, onActiveCardSelection, offersOrder}) => {
 
   return (
-
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => <OfferCard
+      {[...offers].sort(COMPARE_FUNCTIONS.get(offersOrder)).map((offer) => <OfferCard
         title={offer.title}
         isPremium={offer.isPremium}
         price={offer.price}
@@ -23,7 +24,6 @@ const OffersList = ({offers, onActiveCardSelection}) => {
         onOfferCardSelection={onActiveCardSelection}
       />)}
     </div>
-
   );
 };
 
@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
   return {
     offers: state.offers,
     activeOfferId: state.activeOfferId,
+    offersOrder: state.offersOrder,
   };
 };
 
@@ -44,6 +45,7 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps)).isRequired,
   activeOfferId: PropTypes.number.isRequired,
   onActiveCardSelection: PropTypes.func.isRequired,
+  offersOrder: PropTypes.string.isRequired
 };
 
 export {OffersList};

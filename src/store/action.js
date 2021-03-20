@@ -8,7 +8,8 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `app/redirectToRoute`,
   AUTHORIZE: `user/authorize`,
   UNAUTHORIZE: `user/unauthorize`,
-  SET_ACTIVE_OFFER: `offer/setActive`
+  SET_ACTIVE_OFFER: `offer/setActive`,
+  SET_OFFERS_ORDER: `offer/setOrder`,
 };
 
 export const ActionCreator = {
@@ -38,5 +39,9 @@ export const ActionCreator = {
   setActiveOffer: (offerId) => ({
     type: ActionType.SET_ACTIVE_OFFER,
     payload: offerId,
+  }),
+  setOffersOrder: (sortingOrder) => ({
+    type: ActionType.SET_OFFERS_ORDER,
+    payload: sortingOrder,
   })
 };

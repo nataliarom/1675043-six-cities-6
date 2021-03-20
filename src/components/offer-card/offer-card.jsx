@@ -33,7 +33,7 @@ const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isF
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}/>
+            <span style={{width: `${rating * 20}%`}}/>
             <span className="visually-hidden">Rating {rating}</span>
           </div>
         </div>

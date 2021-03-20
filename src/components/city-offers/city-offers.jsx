@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import Map from "../map/map";
 import OffersCount from "../offers-count/offers-count";
 import {connect} from "react-redux";
-import {OffersOrder} from "../offers-order/offers-orfer";
 import {CityProps} from "../../types/city-props";
+import OffersSortingOrder from "../offers-sorting-order/offers-sorting-order";
 
 const CityOffers = ({city, offersCount}) => {
 
@@ -16,7 +16,7 @@ const CityOffers = ({city, offersCount}) => {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <OffersCount/>
-          <OffersOrder/>
+          <OffersSortingOrder/>
           <OffersList/>
         </section>
         <div className="cities__right-section">

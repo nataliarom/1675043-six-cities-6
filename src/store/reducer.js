@@ -1,6 +1,6 @@
 
 import {ActionType} from './action';
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus, OffersOrder} from "../const";
 import {getOffersFilteredByCity} from "../utils";
 
 
@@ -14,6 +14,7 @@ const initialState = {
   cities: [],
   isDataLoaded: false,
   activeOfferId: -1,
+  offersOrder: OffersOrder.POPULAR,
 };
 
 const reducer = (state = initialState, action) => {
@@ -54,6 +55,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         activeOfferId: action.payload
+      };
+    case ActionType.SET_OFFERS_ORDER:
+      return {
+        ...state,
+        offersOrder: action.payload
       };
   }
 
