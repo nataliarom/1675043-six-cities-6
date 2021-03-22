@@ -1,29 +1,21 @@
-import {CITIES} from "../const";
-
 
 export const ActionType = {
   SET_CITY: `city/set`,
-  UPDATE_CITY_OFFERS: `offer/updateList`,
   UPDATE_OFFERS_COUNT: `offer/updateCount`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_HOTELS: `hotels/load`,
+  LOAD_CITIES: `cities/load`,
   REDIRECT_TO_ROUTE: `app/redirectToRoute`,
   AUTHORIZE: `user/authorize`,
   UNAUTHORIZE: `user/unauthorize`,
+  SET_ACTIVE_OFFER: `offer/setActive`,
+  SET_OFFERS_ORDER: `offer/setOrder`,
 };
 
 export const ActionCreator = {
-  setCity: (city, index) => ({
+  setCity: (city) => ({
     type: ActionType.SET_CITY,
-    payload: CITIES[index],
-  }),
-  loadCityOffers: (city, index) => ({
-    type: ActionType.UPDATE_CITY_OFFERS,
-    payload: index ? CITIES[index] : CITIES.find((c)=> c === city),
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
+    payload: city,
   }),
   authorize: (authInfo) => ({
     type: ActionType.AUTHORIZE,
@@ -36,8 +28,20 @@ export const ActionCreator = {
     type: ActionType.LOAD_HOTELS,
     payload: hotels,
   }),
+  loadCities: (cities) => ({
+    type: ActionType.LOAD_CITIES,
+    payload: cities,
+  }),
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  setActiveOffer: (offerId) => ({
+    type: ActionType.SET_ACTIVE_OFFER,
+    payload: offerId,
+  }),
+  setOffersOrder: (sortingOrder) => ({
+    type: ActionType.SET_OFFERS_ORDER,
+    payload: sortingOrder,
   })
 };
