@@ -44,8 +44,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export {CitiesList};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
+
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.shape(CityProps)),

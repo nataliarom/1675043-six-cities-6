@@ -5,7 +5,6 @@ export const ActionType = {
   SET_CITY: `city/set`,
   UPDATE_CITY_OFFERS: `offer/updateList`,
   UPDATE_OFFERS_COUNT: `offer/updateCount`,
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   LOAD_HOTELS: `hotels/load`,
   REDIRECT_TO_ROUTE: `app/redirectToRoute`,
   AUTHORIZE: `user/authorize`,
@@ -21,10 +20,7 @@ export const ActionCreator = {
     type: ActionType.UPDATE_CITY_OFFERS,
     payload: index ? CITIES[index] : CITIES.find((c)=> c === city),
   }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
+
   authorize: (authInfo) => ({
     type: ActionType.AUTHORIZE,
     payload: authInfo,
@@ -39,5 +35,9 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  loadHotelData: (hotel) => ({
+    type: ActionType.LOAD_HOTELS,
+    payload: hotel,
   })
 };

@@ -22,3 +22,10 @@ export const login = ({login: email, password: password}) => (dispatch, _getStat
   api.post(APIRoute.LOGIN, {email, password})
     .then((data) => dispatch(ActionCreator.authorize(renameKeys(data.data))))
 );
+
+export const fetchOfferById = (id) => (dispatch, _getState, api) => (
+  api.get(APIRoute.HOTEL_BY_ID)
+    .then(({data}) => {
+      dispatch(ActionCreator.loadHotelData(renameKeys(data)));
+    })
+);
