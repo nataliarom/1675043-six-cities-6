@@ -8,7 +8,7 @@ import {fetchOffersList} from "../../store/api-actions";
 import CityOffers from "../city-offers/city-offers";
 import PageHeader from "../page-header/page-header";
 
-const Main = ({isDataLoaded, onLoadData}) => {
+const Main = ({isDataLoaded, onLoadData, offersCount}) => {
   // const history = useHistory(); for future usage
 
   useEffect(() => {
@@ -25,28 +25,28 @@ const Main = ({isDataLoaded, onLoadData}) => {
 
 
   return (
-    <>
-      <div className="page page--gray page--main">
-        <PageHeader/>
-        <main className="page__main page__main--index">
-          <h1 className="visually-hidden">Cities</h1>
-          <CitiesList />
-          <div className="cities">
-            <CityOffers/>
-          </div>
-        </main>
-      </div>
-    </>
+    <div className={`page page--gray page--main ${offersCount === 0 && `page__main--index-empty`}`}>
+      <PageHeader/>
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
+        <CitiesList />
+        <div className="cities">
+          <CityOffers/>
+        </div>
+      </main>
+    </div>
   );
 };
 
 Main.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
+  offersCount: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isDataLoaded: state.isDataLoaded,
+  offersCount: state.offersCount
 });
 
 const mapDispatchToProps = (dispatch) => ({
