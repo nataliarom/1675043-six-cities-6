@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import Map from "../map/map";
 import OffersCount from "../offers-count/offers-count";
 import {connect} from "react-redux";
-import {OffersOrder} from "../offers-order/offers-orfer";
 import {CityProps} from "../../types/city-props";
+import OffersSortingOrder from "../offers-sorting-order/offers-sorting-order";
 
 const CityOffers = ({city, offersCount}) => {
 
@@ -16,11 +16,11 @@ const CityOffers = ({city, offersCount}) => {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <OffersCount/>
-          <OffersOrder/>
-          <OffersList/>
+          <OffersSortingOrder/>
+          <OffersList className={`cities__places-list places__list tabs__content`}/>
         </section>
         <div className="cities__right-section">
-          <Map />
+          <Map className={`cities__map`} />
         </div>
       </div>
       :
@@ -29,7 +29,7 @@ const CityOffers = ({city, offersCount}) => {
           <div className="cities__status-wrapper tabs__content">
             <b className="cities__status">No places to stay available</b>
             <p className="cities__status-description">We could not find any property available at the moment in
-              {city.name} </p>
+              {city && city.name} </p>
           </div>
         </section>
         <div className="cities__right-section page page__main--index-empty">
@@ -40,7 +40,7 @@ const CityOffers = ({city, offersCount}) => {
 
 CityOffers.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  city: PropTypes.shape(CityProps).isRequired,
+  city: PropTypes.shape(CityProps),
 };
 
 const mapStateToProps = (state) => {

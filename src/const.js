@@ -1,4 +1,11 @@
 
+export const OffersOrder = {
+  POPULAR: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`
+};
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -12,9 +19,8 @@ export const AppRoute = {
 };
 
 export const APIRoute = {
-  HOTELS: `/hotels`,
+  HOTELS: `/hotels/`,
+  COMMENTS: `/comments/`,
   LOGIN: `/login`,
-  HOTEL_BY_ID: `/hotels/:id`,
-  HOTELS_NEARBY: `/hotels/: hotel_id/nearby`,
-  HOTEL_COMMENTS: `/comments/: hotel_id`,
+  HOTELS_NEARBY: `/hotels/:id/nearby`,
 };

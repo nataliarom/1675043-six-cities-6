@@ -1,9 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {CityProps} from "../../types/city-props";
+import {connect} from "react-redux";
 
 const CitiesList = ({cities, currentCity, onCitySelect}) => {
   return (
@@ -19,7 +19,7 @@ const CitiesList = ({cities, currentCity, onCitySelect}) => {
                 }}
                 className={
                   `locations__item-link tabs__item ${
-                    city.name === currentCity.name && `tabs__item--active`}`}>
+                    currentCity && city && city.name === currentCity.name && `tabs__item--active`}`}>
                 <span>{city.name}</span>
               </Link>
             </li>
@@ -37,18 +37,17 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onCitySelect(city, index) {
-    dispatch(ActionCreator.setCity(city, index));
-    dispatch(ActionCreator.loadCityOffers(city, index));
+  onCitySelect(city) {
+    dispatch(ActionCreator.setCity(city));
   },
 });
 
 
-
-
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.shape(CityProps)),
-  currentCity: PropTypes.shape(CityProps).isRequired,
+  currentCity: PropTypes.shape(CityProps),
   onCitySelect: PropTypes.func.isRequired
 };
 
+export {CitiesList};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

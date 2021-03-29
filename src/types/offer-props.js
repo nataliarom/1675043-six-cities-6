@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const OfferProps = PropTypes.shape({
+export const OfferProps = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -31,4 +31,4 @@ export const OfferProps = PropTypes.shape({
   }).isRequired,
   maxAdults: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired
-});
+};

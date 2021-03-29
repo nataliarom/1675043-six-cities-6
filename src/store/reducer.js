@@ -1,34 +1,38 @@
 
 import {ActionType} from './action';
-import {DEFAULT_CITY, CITIES, AuthorizationStatus} from "../const";
+import {AuthorizationStatus, OffersOrder} from "../const";
 import {getOffersFilteredByCity} from "../utils";
 
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: null,
-  city: DEFAULT_CITY,
+  city: null,
   hotels: [],
   offers: [],
+  mapOffers: [],
   offersCount: 0,
-  cities: CITIES,
-  isDataLoaded: false
+  cities: [],
+  isDataLoaded: false,
+  activeOfferId: -1,
+  offersOrder: OffersOrder.POPULAR,
+  openedOffer: null,
+  reviews: [],
+  nearbyOffers: [],
 };
-
+// TODO split reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY:
-      return {
-        ...state,
-        city: action.payload
-      };
-    case ActionType.UPDATE_CITY_OFFERS:
       const offers = getOffersFilteredByCity(state.hotels, action.payload);
       return {
         ...state,
         offers,
-        offersCount: offers.length
+        mapOffers: offers,
+        offersCount: offers.length,
+        city: action.payload,
       };
+
     case ActionType.UNAUTHORIZE:
       return {
         ...state,
@@ -41,11 +45,42 @@ const reducer = (state = initialState, action) => {
         hotels: action.payload,
         isDataLoaded: true
       };
+    case ActionType.LOAD_CITIES:
+      return {
+        ...state,
+        cities: action.payload,
+      };
     case ActionType.AUTHORIZE:
       return {
         ...state,
         authInfo: action.payload,
         authorizationStatus: AuthorizationStatus.AUTH
+      };
+    case ActionType.SET_ACTIVE_OFFER:
+      return {
+        ...state,
+        activeOfferId: action.payload
+      };
+    case ActionType.SET_OFFERS_ORDER:
+      return {
+        ...state,
+        offersOrder: action.payload
+      };
+    case ActionType.LOAD_HOTEL_BY_ID:
+      return {
+        ...state,
+        openedOffer: action.payload
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload
+      };
+    case ActionType.LOAD_NEARBY_HOTELS:
+      return {
+        ...state,
+        nearbyOffers: action.payload,
+        activeOfferId: state.openedOffer.id,
       };
   }
 

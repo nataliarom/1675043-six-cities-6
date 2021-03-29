@@ -6,19 +6,23 @@ import PropTypes from "prop-types";
 import {CityProps} from "../../types/city-props";
 import {OfferCardProps} from "../../types/offer-card-props";
 
-const Map = ({currentCity, offers}) => {
+const Map = ({className, currentCity, offers, activeOfferId}) => {
 
   const mapRef = useRef();
   const icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
   });
+  const iconActive = leaflet.icon({
+    iconUrl: `img/pin-active.svg`,
+    iconSize: [30, 30]
+  });
 
   const coordinates = [currentCity.location.latitude, currentCity.location.longitude];
   const zoom = currentCity.location.zoom;
-  const points = offers.map((v)=>[v.location.latitude, v.location.longitude]);
 
-  function updateMap() {
+
+  const updateMap = () => {
     mapRef.current.setView(coordinates, zoom);
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -26,13 +30,15 @@ const Map = ({currentCity, offers}) => {
       })
       .addTo(mapRef.current);
 
-    points.forEach((point)=> {
+    offers.forEach((offer) => {
       leaflet
-        .marker(point, {icon})
+        .marker([offer.location.latitude, offer.location.longitude],
+            {icon: activeOfferId === offer.id ? iconActive : icon})
         .addTo(mapRef.current);
     });
-  }
-  useEffect(()=> {
+  };
+
+  useEffect(() => {
 
     mapRef.current = leaflet.map(`map`, {
       center: coordinates,
@@ -44,12 +50,12 @@ const Map = ({currentCity, offers}) => {
     updateMap();
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     updateMap();
-  }, [currentCity]);
+  }, [currentCity, offers, activeOfferId]);
 
   return (
-    <section ref={mapRef} id="map" className="cities__map map"/>
+    <section ref={mapRef} id="map" className={className + ` map`}/>
   );
 
 };
@@ -57,13 +63,16 @@ const Map = ({currentCity, offers}) => {
 const mapStateToProps = (state) => {
   return {
     currentCity: state.city,
-    offers: state.offers
+    offers: state.offers,
+    activeOfferId: state.activeOfferId
   };
 };
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps)).isRequired,
   currentCity: PropTypes.shape(CityProps).isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export {Map};
