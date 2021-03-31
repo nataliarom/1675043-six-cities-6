@@ -60,11 +60,11 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
 
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    currentCity: state.city,
-    offers: state.offers,
-    activeOfferId: state.activeOfferId
+    currentCity: HOTEL.city,
+    offers: HOTEL.offers,
+    activeOfferId: HOTEL.activeOfferId
   };
 };
 

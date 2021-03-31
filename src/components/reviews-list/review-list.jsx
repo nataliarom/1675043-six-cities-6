@@ -34,11 +34,11 @@ ReviewsList.propTypes = {
 };
 
 // TODO Sort reviews by date, newest on top
-const mapStateToProps = (state) => {
+const mapStateToProps = ({REVIEW, USER, HOTEL}) => {
   return {
-    reviews: state.reviews.slice(0, 10),
-    authorizationStatus: state.authorizationStatus,
-    offerId: state.openedOffer.id
+    reviews: REVIEW.reviews.slice(0, 10),
+    authorizationStatus: USER.authorizationStatus,
+    offerId: HOTEL.openedOffer.id
   };
 };
 

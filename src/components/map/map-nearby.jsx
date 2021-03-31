@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {Map} from "./map";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    currentCity: state.city,
-    offers: [...state.nearbyOffers, state.openedOffer],
-    activeOfferId: state.activeOfferId
+    currentCity: HOTEL.city,
+    offers: [...HOTEL.nearbyOffers, HOTEL.openedOffer],
+    activeOfferId: HOTEL.activeOfferId
   };
 };
 

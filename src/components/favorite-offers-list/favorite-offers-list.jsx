@@ -39,8 +39,8 @@ FavoriteOffers.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers,
+const mapStateToProps = ({HOTEL}) => ({
+  favoriteOffers: HOTEL.favoriteOffers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

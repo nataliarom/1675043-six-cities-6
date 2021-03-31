@@ -8,10 +8,10 @@ const OffersCount = ({offersCount, currentCity}) => {
     <b className="places__found">{offersCount} {offersCount === 1 ? `place` : `places`} to stay in {currentCity.name}</b>
   );
 };
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    currentCity: state.city,
-    offersCount: state.offersCount
+    currentCity: HOTEL.city,
+    offersCount: HOTEL.offersCount
   };
 };
 

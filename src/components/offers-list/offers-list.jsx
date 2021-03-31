@@ -42,11 +42,11 @@ const OffersList = ({className, offers, onActiveCardSelection, offersOrder}) => 
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    offers: state.offers,
-    activeOfferId: state.activeOfferId,
-    offersOrder: state.offersOrder,
+    offers: HOTEL.offers,
+    activeOfferId: HOTEL.activeOfferId,
+    offersOrder: HOTEL.offersOrder,
   };
 };
 

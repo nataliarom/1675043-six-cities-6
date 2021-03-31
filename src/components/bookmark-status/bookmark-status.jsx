@@ -34,9 +34,9 @@ BookmarkStatus.propTypes = {
   width: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({USER}) => {
   return {
-    authorizationStatus: state.authorizationStatus,
+    authorizationStatus: USER.authorizationStatus,
   };
 };
 const mapDispatchToProps = (dispatch) => ({

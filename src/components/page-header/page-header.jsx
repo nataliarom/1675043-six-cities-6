@@ -44,10 +44,10 @@ PageHeader.propTypes = {
   authInfo: PropTypes.shape(AuthInfoProps)
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({USER}) => {
   return {
-    authorizationStatus: state.authorizationStatus,
-    authInfo: state.authInfo,
+    authorizationStatus: USER.authorizationStatus,
+    authInfo: USER.authInfo,
   };
 };
 

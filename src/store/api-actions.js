@@ -1,13 +1,15 @@
 import {ActionCreator} from "./action";
 import {APIRoute} from "../const";
 import {renameKeys, getCitiesFromOffersList} from "../utils";
+import {NameSpace} from "./root-reducer";
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
       dispatch(ActionCreator.loadCities(getCitiesFromOffersList(data)));
       dispatch(ActionCreator.loadHotels(data.map((hotel) => (renameKeys(hotel)))));
-      dispatch(ActionCreator.setCity(_getState().cities[0]));
+      // TODO SPLIT CITY AND OFFER LOGIC
+      dispatch(ActionCreator.setCity(_getState()[NameSpace.HOTEL].cities[0]));
     })
 );
 
@@ -27,7 +29,7 @@ export const login = ({login: email, password: password}) => (dispatch, _getStat
 export const fetchOfferById = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}${offerId}`)
     .then(({data}) => {
-      if (!_getState().city) {
+      if (!_getState()[NameSpace.HOTEL].city) {
         dispatch(ActionCreator.setCity(data.city));
       }
       dispatch(ActionCreator.loadHotelData(renameKeys(data)));

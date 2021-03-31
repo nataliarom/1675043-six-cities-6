@@ -56,9 +56,9 @@ FavoritesPage.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers,
-  isFavoritesDataLoaded: state.isFavoritesDataLoaded,
+const mapStateToProps = ({HOTEL}) => ({
+  favoriteOffers: HOTEL.favoriteOffers,
+  isFavoritesDataLoaded: HOTEL.isFavoritesDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -57,9 +57,9 @@ OffersSortingOrder.propTypes = {
   onOrderSelect: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    offersOrder: state.offersOrder,
+    offersOrder: HOTEL.offersOrder,
   };
 };
 

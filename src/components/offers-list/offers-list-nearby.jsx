@@ -2,11 +2,11 @@ import {connect} from 'react-redux';
 import {OffersList} from "./offers-list";
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    offers: state.nearbyOffers,
-    activeOfferId: state.activeOfferId,
-    offersOrder: state.offersOrder,
+    offers: HOTEL.nearbyOffers,
+    activeOfferId: HOTEL.activeOfferId,
+    offersOrder: HOTEL.offersOrder,
   };
 };
 const mapDispatchToProps = () => ({

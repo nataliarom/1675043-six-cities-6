@@ -44,9 +44,9 @@ Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isDataLoaded: state.isDataLoaded,
-  offersCount: state.offersCount
+const mapStateToProps = ({HOTEL}) => ({
+  isDataLoaded: HOTEL.isDataLoaded,
+  offersCount: HOTEL.offersCount
 });
 
 const mapDispatchToProps = (dispatch) => ({

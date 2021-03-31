@@ -1,12 +1,8 @@
-
-import {ActionType} from './action';
-import {AuthorizationStatus, OffersOrder} from "../const";
-import {getOffersFilteredByCity} from "../utils";
-
+import {OffersOrder} from "../../const";
+import {ActionType} from "../action";
+import {getOffersFilteredByCity} from "../../utils";
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  authInfo: null,
   city: null,
   hotels: [],
   offers: [],
@@ -17,13 +13,12 @@ const initialState = {
   activeOfferId: -1,
   offersOrder: OffersOrder.POPULAR,
   openedOffer: null,
-  reviews: [],
   nearbyOffers: [],
   isFavoritesDataLoaded: false,
   favoriteOffers: [],
 };
-// TODO split reducer
-const reducer = (state = initialState, action) => {
+
+const hotel = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY:
       const offers = getOffersFilteredByCity(state.hotels, action.payload);
@@ -33,13 +28,6 @@ const reducer = (state = initialState, action) => {
         mapOffers: offers,
         offersCount: offers.length,
         city: action.payload,
-      };
-
-    case ActionType.UNAUTHORIZE:
-      return {
-        ...state,
-        authorizationStatus: AuthorizationStatus.NO_AUTH,
-        authInfo: null
       };
     case ActionType.LOAD_HOTELS:
       return {
@@ -51,12 +39,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cities: action.payload,
-      };
-    case ActionType.AUTHORIZE:
-      return {
-        ...state,
-        authInfo: action.payload,
-        authorizationStatus: AuthorizationStatus.AUTH
       };
     case ActionType.SET_ACTIVE_OFFER:
       return {
@@ -73,11 +55,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         openedOffer: action.payload
       };
-    case ActionType.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload
-      };
     case ActionType.LOAD_NEARBY_HOTELS:
       return {
         ...state,
@@ -91,7 +68,7 @@ const reducer = (state = initialState, action) => {
         isFavoritesDataLoaded: true,
       };
     case ActionType.UPDATE_FAVORITE_STATUS:
-      const hotels = state.hotels.map((hotel)=>(hotel.id === action.payload.id ? action.payload : hotel));
+      const hotels = state.hotels.map((h)=>(h.id === action.payload.id ? action.payload : h));
       return {
         ...state,
         favoriteOffers: action.payload.isFavorite
@@ -105,4 +82,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer};
+export {hotel};

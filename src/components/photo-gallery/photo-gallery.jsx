@@ -22,9 +22,9 @@ PhotoGallery.propTypes = {
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    images: state.openedOffer.images.slice(0, 6),
+    images: HOTEL.openedOffer.images.slice(0, 6),
   };
 };
 

@@ -117,8 +117,8 @@ Room.propTypes = {
   onAddToBookmarks: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  openedOffer: state.openedOffer,
+const mapStateToProps = ({HOTEL}) => ({
+  openedOffer: HOTEL.openedOffer,
 });
 
 
