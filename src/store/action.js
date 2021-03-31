@@ -13,8 +13,8 @@ export const ActionType = {
   LOAD_HOTEL_BY_ID: `hotel/loadById`,
   LOAD_REVIEWS: `comments/load`,
   LOAD_NEARBY_HOTELS: `hotels/loadNearby`,
-  CLEAR_OFFERS_DATA: `offer/clear`
-
+  LOAD_FAVORITE_HOTELS: `hotels/loadFavorite`,
+  UPDATE_FAVORITE_STATUS: `hotel/updateFavoriteStatus`,
 };
 
 export const ActionCreator = {
@@ -61,7 +61,12 @@ export const ActionCreator = {
     type: ActionType.LOAD_NEARBY_HOTELS,
     payload: hotels,
   }),
-  clearOffersData: ()=>({
-    type: ActionType.CLEAR_OFFERS_DATA,
+  loadFavoriteHotels: (hotels) =>({
+    type: ActionType.LOAD_FAVORITE_HOTELS,
+    payload: hotels,
+  }),
+  updateFavoriteStatus: (hotel) =>({
+    type: ActionType.UPDATE_FAVORITE_STATUS,
+    payload: hotel,
   })
 };

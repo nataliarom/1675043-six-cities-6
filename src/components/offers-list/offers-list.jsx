@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from "../offer-card/offer-card";
-import {OfferCardProps} from "../../types/offer-card-props";
 import {connect} from 'react-redux';
 import {ActionCreator} from "../../store/action";
 import {OffersOrder} from "../../const";
+import {OfferProps} from "../../types/offer-props";
 
 
 export const COMPARE_FUNCTIONS = {
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps)).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(OfferProps)).isRequired,
   activeOfferId: PropTypes.number.isRequired,
   onActiveCardSelection: PropTypes.func.isRequired,
   offersOrder: PropTypes.string.isRequired,

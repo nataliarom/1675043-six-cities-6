@@ -18,7 +18,7 @@ export const getOffersFilteredByCity = (allOffers, city) => {
     return offer.city.name === city.name;
   });
 };
-// TODO refactor getCitiesFromOffersLis
+// TODO refactor getCitiesFromOffersList
 export const getCitiesFromOffersList = (allOffers) => {
   let cities = [];
   allOffers.forEach((offer)=> {

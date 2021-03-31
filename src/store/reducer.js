@@ -19,6 +19,8 @@ const initialState = {
   openedOffer: null,
   reviews: [],
   nearbyOffers: [],
+  isFavoritesDataLoaded: false,
+  favoriteOffers: [],
 };
 // TODO split reducer
 const reducer = (state = initialState, action) => {
@@ -82,8 +84,24 @@ const reducer = (state = initialState, action) => {
         nearbyOffers: action.payload,
         activeOfferId: state.openedOffer.id,
       };
+    case ActionType.LOAD_FAVORITE_HOTELS:
+      return {
+        ...state,
+        favoriteOffers: action.payload,
+        isFavoritesDataLoaded: true,
+      };
+    case ActionType.UPDATE_FAVORITE_STATUS:
+      const hotels = state.hotels.map((hotel)=>(hotel.id === action.payload.id ? action.payload : hotel));
+      return {
+        ...state,
+        favoriteOffers: action.payload.isFavorite
+          ? [...state.favoriteOffers, action.payload]
+          : state.favoriteOffers.filter((offer)=>(offer.id !== action.payload.id)),
+        openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : null,
+        hotels,
+        offers: getOffersFilteredByCity(hotels, state.city),
+      };
   }
-
   return state;
 };
 

@@ -1,7 +1,7 @@
 import {ReviewProps} from "../../types/review-props";
 import React from 'react';
 
-export const getReviewDateString = (date) => {
+const getReviewDateString = (date) => {
   try {
     let d = new Date(date);
     const months = [`January`, `February`, `March`, `April`, `May`, `Jun`, `July`, `August`, `September`, `October`, `November`, `December`];

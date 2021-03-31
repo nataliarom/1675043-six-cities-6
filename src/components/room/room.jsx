@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import PageHeader from "../page-header/page-header";
 import ReviewsList from "../reviews-list/review-list";
-import {fetchNearbyOffers, fetchOfferById, fetchReviews} from "../../store/api-actions";
+import {addToFavorites, fetchNearbyOffers, fetchOfferById, fetchReviews} from "../../store/api-actions";
 import {OfferProps} from "../../types/offer-props";
 import LoadingScreen from "../loading-screen/loading-screen";
 import {connect} from "react-redux";
 import PhotoGallery from "../photo-gallery/photo-gallery";
 import {OffersListNearby} from "../offers-list/offers-list-nearby";
 import {MapNearby} from "../map/map-nearby";
+import BookmarkStatus from "../bookmark-status/bookmark-status";
 
 // TODO page not found redirect if no offer
 
@@ -39,12 +40,12 @@ const Room = ({id, openedOffer, onLoadData}) => {
                 <h1 className="property__name">
                   {openedOffer && openedOffer.title}
                 </h1>
-                {openedOffer && !openedOffer.isFavorite ? <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button> : ``}
+                <BookmarkStatus
+                  className={`property__bookmark`}
+                  width="31"
+                  height="33"
+                  offerId={openedOffer.id}
+                  bookmarkStatus={openedOffer.isFavorite ? 1 : 0} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -113,7 +114,7 @@ Room.propTypes = {
   id: PropTypes.number.isRequired,
   openedOffer: PropTypes.shape(OfferProps),
   onLoadData: PropTypes.func.isRequired,
-
+  onAddToBookmarks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -126,6 +127,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchOfferById(offerId));
     dispatch(fetchReviews(offerId));
     dispatch(fetchNearbyOffers(offerId));
+  },
+  onAddToBookmarks(offerId, status) {
+    dispatch(addToFavorites({offerId, status}));
   }
 });
 

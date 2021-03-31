@@ -4,7 +4,7 @@ import leaflet from 'leaflet';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {CityProps} from "../../types/city-props";
-import {OfferCardProps} from "../../types/offer-card-props";
+import {OfferProps} from "../../types/offer-props";
 
 const Map = ({className, currentCity, offers, activeOfferId}) => {
 
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
 };
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(OfferCardProps)).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(OfferProps)).isRequired,
   currentCity: PropTypes.shape(CityProps).isRequired,
   activeOfferId: PropTypes.number.isRequired,
   className: PropTypes.string.isRequired,

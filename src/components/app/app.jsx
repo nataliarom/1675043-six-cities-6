@@ -21,7 +21,7 @@ const App = () => {
           <SignIn />
         </Route>
         <PrivateRoute exact path={AppRoute.FAVORITES}
-          render={()=><FavoritesPage favoriteOffers={[]} />}/>
+          render={()=><FavoritesPage />}/>
         <Route exact path={AppRoute.OFFER}
           render = {({match})=>(
             Number(match.params.id) ? <Room id={Number(match.params.id)}/> : <PageNotFound />

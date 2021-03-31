@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {OfferCardProps} from "../../types/offer-card-props";
+import BookmarkStatus from "../bookmark-status/bookmark-status";
 
 const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isFavorite, onOfferCardSelection}) => {
 
@@ -24,12 +25,13 @@ const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isF
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">{!isFavorite ? `To bookmarks` : ``} </span>
-          </button>
+          <BookmarkStatus
+            className={`place-card__bookmark`}
+            width="18"
+            height="19"
+            offerId={id}
+            bookmarkStatus={isFavorite ? 1 : 0} />
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -23,4 +23,6 @@ export const APIRoute = {
   COMMENTS: `/comments/`,
   LOGIN: `/login`,
   HOTELS_NEARBY: `/hotels/:id/nearby`,
+  FAVORITE_HOTELS: `/favorite/`,
+  FAVORITE_HOTELS_UPDATE: `/favorite/:id/:status`
 };

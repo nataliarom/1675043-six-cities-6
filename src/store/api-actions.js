@@ -52,3 +52,16 @@ export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
       dispatch(ActionCreator.loadNearbyHotels(data.map((hotel) => (renameKeys(hotel)))));
     })
 );
+
+export const fetchFavoriteHotels = () => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.FAVORITE_HOTELS}`)
+    .then(({data}) => {
+      dispatch(ActionCreator.loadFavoriteHotels(data.map((hotel) => (renameKeys(hotel)))));
+    })
+);
+export const addToFavorites = ({offerId, status}) => (dispatch, _getState, api) => (
+  api.post((`${APIRoute.FAVORITE_HOTELS}${offerId}/${status}`), {offerId, status})
+    .then(({data}) => {
+      dispatch(ActionCreator.updateFavoriteStatus(renameKeys(data)));
+    })
+);
