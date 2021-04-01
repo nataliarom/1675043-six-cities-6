@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {addComment, checkAuth} from "../../store/api-actions";
 
 
-const AddCommentForm = ({offerId, onSubmit}) => {
+const AddCommentForm = ({offerId, onSubmit, error, isSaved}) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState(``);
   const [isSaving, setIsSaving] = useState(false);
@@ -20,11 +20,20 @@ const AddCommentForm = ({offerId, onSubmit}) => {
       rating,
       offerId
     });
-    // TODO clear values on save or  show error and do not clear form
-    setRating(0);
-    setComment(``);
-    setIsSaving(false);
   };
+
+  useEffect(() => {
+
+    if (isSaving && error) {
+      setIsSaving(false);
+    }
+    if (isSaving && isSaved) {
+      setRating(0);
+      setComment(``);
+      setIsSaving(false);
+    }
+  }, [error, isSaved]);
+
 
   const handleRatingChange = (evt) => {
     const {value} = evt.target;
@@ -68,12 +77,18 @@ const AddCommentForm = ({offerId, onSubmit}) => {
 AddCommentForm.propTypes = {
   offerId: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+};
+const mapStateToProps = ({REVIEW}) => {
+  return {
+    isSaved: REVIEW.reviewSaved,
+    error: REVIEW.reviewError,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(commentData) {
-    // TODO AUTH check before
-    // TODO HANDLE ERROR
     dispatch(checkAuth());
     dispatch(addComment(commentData));
   }
@@ -81,4 +96,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export {AddCommentForm};
-export default connect(null, mapDispatchToProps)(AddCommentForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCommentForm);

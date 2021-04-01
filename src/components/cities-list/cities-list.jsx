@@ -29,10 +29,10 @@ const CitiesList = ({cities, currentCity, onCitySelect}) => {
     </div>
   );
 };
-const mapStateToProps = ({CITY}) => {
+const mapStateToProps = ({HOTEL}) => {
   return {
-    currentCity: CITY.city,
-    cities: CITY.cities
+    currentCity: HOTEL.city,
+    cities: HOTEL.cities
   };
 };
 

@@ -1,17 +1,18 @@
 
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import PropTypes from "prop-types";
 import PageHeader from "../page-header/page-header";
-import {fetchFavoriteHotels} from "../../store/api-actions";
+import {checkAuth, fetchFavoriteHotels} from "../../store/api-actions";
 import {connect} from "react-redux";
 import LoadingScreen from "../loading-screen/loading-screen";
 import FavoriteOffersEmpty from "../favorite-offers-list/favorire-offers-empty";
 import FavoriteOffers from "../favorite-offers-list/favorite-offers-list";
 import {OfferProps} from "../../types/offer-props";
+import {AppRoute, AuthorizationStatus} from "../../const";
 
 
-const FavoritesPage = ({favoriteOffers, isFavoritesDataLoaded, onLoadData}) => {
+const FavoritesPage = ({authorizationStatus, favoriteOffers, isFavoritesDataLoaded, onLoadData}) => {
 
   useEffect(() => {
 
@@ -23,6 +24,12 @@ const FavoritesPage = ({favoriteOffers, isFavoritesDataLoaded, onLoadData}) => {
   if (!isFavoritesDataLoaded) {
     return (
       <LoadingScreen />
+    );
+  }
+
+  if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+    return (
+      <Redirect to={AppRoute.LOGIN}/>
     );
   }
 
@@ -52,18 +59,20 @@ const FavoritesPage = ({favoriteOffers, isFavoritesDataLoaded, onLoadData}) => {
 FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferProps)),
   isFavoritesDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired
+  onLoadData: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 
-const mapStateToProps = ({HOTEL}) => ({
+const mapStateToProps = ({HOTEL, USER}) => ({
   favoriteOffers: HOTEL.favoriteOffers,
   isFavoritesDataLoaded: HOTEL.isFavoritesDataLoaded,
+  authorizationStatus: USER.authorizationStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
-    // TODO checkAuth() before
+    dispatch(checkAuth());
     dispatch(fetchFavoriteHotels());
   },
 });

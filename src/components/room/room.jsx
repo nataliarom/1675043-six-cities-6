@@ -10,10 +10,10 @@ import PhotoGallery from "../photo-gallery/photo-gallery";
 import {OffersListNearby} from "../offers-list/offers-list-nearby";
 import {MapNearby} from "../map/map-nearby";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
+import PageNotFound from "../page-not-found/page-not-found";
 
-// TODO page not found redirect if no offer
-
-const Room = ({id, openedOffer, onLoadData}) => {
+// TODO replace string with enum in props like apartment, room, house, hotel.
+const Room = ({id, openedOffer, onLoadData, isError}) => {
 
   useEffect(() => {
     if (!openedOffer || openedOffer.id !== id) {
@@ -21,11 +21,17 @@ const Room = ({id, openedOffer, onLoadData}) => {
     }
   }, [id]);
 
-  if (!openedOffer) {
+  if (!openedOffer && !isError) {
     return (
       <LoadingScreen />
     );
   }
+  if (!openedOffer && isError) {
+    return (
+      <PageNotFound />
+    );
+  }
+
 
   return (
     <div className="page">
@@ -115,10 +121,12 @@ Room.propTypes = {
   openedOffer: PropTypes.shape(OfferProps),
   onLoadData: PropTypes.func.isRequired,
   onAddToBookmarks: PropTypes.func.isRequired,
+  isError: PropTypes.object,
 };
 
 const mapStateToProps = ({HOTEL}) => ({
   openedOffer: HOTEL.openedOffer,
+  isError: HOTEL.loadOfferError
 });
 
 
