@@ -1,4 +1,3 @@
-
 export const OffersOrder = {
   POPULAR: `Popular`,
   LOW_TO_HIGH: `Price: low to high`,
@@ -16,6 +15,7 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   OFFER: `/offer/:id`,
   ROOT: `/`,
+  ERROR: `/error`,
 };
 
 export const APIRoute = {

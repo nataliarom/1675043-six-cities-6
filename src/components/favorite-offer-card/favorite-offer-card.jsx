@@ -5,7 +5,6 @@ import BookmarkStatus from "../bookmark-status/bookmark-status";
 
 const FavoriteOfferCard = ({id, title, price, type, previewImage, rating}) => {
 
-  console.log(`Render fav card`);
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">

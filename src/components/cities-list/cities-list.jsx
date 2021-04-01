@@ -29,16 +29,17 @@ const CitiesList = ({cities, currentCity, onCitySelect}) => {
     </div>
   );
 };
-const mapStateToProps = ({HOTEL}) => {
+const mapStateToProps = ({CITY}) => {
   return {
-    currentCity: HOTEL.city,
-    cities: HOTEL.cities
+    currentCity: CITY.city,
+    cities: CITY.cities
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onCitySelect(city) {
     dispatch(ActionCreator.setCity(city));
+    dispatch(ActionCreator.filterHotelsByCity(city));
   },
 });
 

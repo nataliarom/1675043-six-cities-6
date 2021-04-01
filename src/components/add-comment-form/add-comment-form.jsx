@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {addComment} from "../../store/api-actions";
+import {addComment, checkAuth} from "../../store/api-actions";
 
 
 const AddCommentForm = ({offerId, onSubmit}) => {
@@ -74,6 +74,7 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit(commentData) {
     // TODO AUTH check before
     // TODO HANDLE ERROR
+    dispatch(checkAuth());
     dispatch(addComment(commentData));
   }
 });

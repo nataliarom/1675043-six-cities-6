@@ -15,11 +15,16 @@ export const ActionType = {
   LOAD_NEARBY_HOTELS: `hotels/loadNearby`,
   LOAD_FAVORITE_HOTELS: `hotels/loadFavorite`,
   UPDATE_FAVORITE_STATUS: `hotel/updateFavoriteStatus`,
+  FILTER_CITY_OFFERS: `hotel/filterByCity`,
 };
 
 export const ActionCreator = {
   setCity: (city) => ({
     type: ActionType.SET_CITY,
+    payload: city,
+  }),
+  filterHotelsByCity: (city) => ({
+    type: ActionType.FILTER_CITY_OFFERS,
     payload: city,
   }),
   authorize: (authInfo) => ({

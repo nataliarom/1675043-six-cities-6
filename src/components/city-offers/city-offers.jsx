@@ -43,10 +43,10 @@ CityOffers.propTypes = {
   city: PropTypes.shape(CityProps),
 };
 
-const mapStateToProps = ({HOTEL}) => {
+const mapStateToProps = ({HOTEL, CITY}) => {
   return {
     offersCount: HOTEL.offersCount,
-    city: HOTEL.city,
+    city: CITY.city,
   };
 };
 

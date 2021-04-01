@@ -7,9 +7,10 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
       dispatch(ActionCreator.loadCities(getCitiesFromOffersList(data)));
+      const city = _getState()[NameSpace.CITY].cities[0];
+      dispatch(ActionCreator.setCity(city));
       dispatch(ActionCreator.loadHotels(data.map((hotel) => (renameKeys(hotel)))));
-      // TODO SPLIT CITY AND OFFER LOGIC
-      dispatch(ActionCreator.setCity(_getState()[NameSpace.HOTEL].cities[0]));
+      dispatch(ActionCreator.filterHotelsByCity(city));
     })
 );
 
@@ -33,7 +34,9 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => (
         dispatch(ActionCreator.setCity(data.city));
       }
       dispatch(ActionCreator.loadHotelData(renameKeys(data)));
-    }).catch(() => {})
+    }).catch((error) => {
+
+    })
 );
 export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.COMMENTS}${offerId}`)

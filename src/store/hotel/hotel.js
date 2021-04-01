@@ -1,14 +1,13 @@
 import {OffersOrder} from "../../const";
 import {ActionType} from "../action";
 import {getOffersByCity} from "./selectors";
+import {NameSpace} from "../root-reducer";
 
 const initialState = {
-  city: null,
   hotels: [],
   offers: [],
   mapOffers: [],
   offersCount: 0,
-  cities: [],
   isDataLoaded: false,
   activeOfferId: -1,
   offersOrder: OffersOrder.POPULAR,
@@ -21,14 +20,18 @@ const initialState = {
 
 const hotel = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_CITY:
-      const offers = getOffersByCity(state.hotels, action.payload);
+    // case ActionType.SET_CITY:
+    //   return {
+    //     ...state,
+    //     city: action.payload ? action.payload : state.cities[0],
+    //   };
+    case ActionType.FILTER_CITY_OFFERS:
+      const offers = getOffersByCity(action.payload, state.hotels);
       return {
         ...state,
         offers,
         mapOffers: offers,
         offersCount: offers.length,
-        city: action.payload,
       };
     case ActionType.LOAD_HOTELS:
       return {
@@ -36,11 +39,11 @@ const hotel = (state = initialState, action) => {
         hotels: action.payload,
         isDataLoaded: true
       };
-    case ActionType.LOAD_CITIES:
-      return {
-        ...state,
-        cities: action.payload,
-      };
+    // case ActionType.LOAD_CITIES:
+    //   return {
+    //     ...state,
+    //     cities: action.payload,
+    //   };
     case ActionType.SET_ACTIVE_OFFER:
       return {
         ...state,
@@ -54,7 +57,7 @@ const hotel = (state = initialState, action) => {
     case ActionType.LOAD_HOTEL_BY_ID:
       return {
         ...state,
-        openedOffer: action.payload
+        openedOffer: action.payload,
       };
     case ActionType.LOAD_NEARBY_HOTELS:
       return {

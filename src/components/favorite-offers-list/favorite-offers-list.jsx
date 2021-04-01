@@ -6,7 +6,6 @@ import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
 import {fetchFavoriteHotels} from "../../store/api-actions";
 
 const FavoriteOffers = ({favoriteOffers}) => {
-  console.log(`Render fav list`);
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">

@@ -12,9 +12,9 @@ import {OfferProps} from "../../types/offer-props";
 
 
 const FavoritesPage = ({favoriteOffers, isFavoritesDataLoaded, onLoadData}) => {
-  console.log(`Render fav page: ${favoriteOffers}`);
+
   useEffect(() => {
-    console.log(`fav page use effect`);
+
     if (!isFavoritesDataLoaded) {
       onLoadData();
     }
