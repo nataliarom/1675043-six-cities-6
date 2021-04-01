@@ -19,7 +19,7 @@ const Room = ({id, openedOffer, onLoadData}) => {
     if (!openedOffer || openedOffer.id !== id) {
       onLoadData(id);
     }
-  }, []);
+  }, [id]);
 
   if (!openedOffer) {
     return (
