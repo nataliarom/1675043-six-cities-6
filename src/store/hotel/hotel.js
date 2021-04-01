@@ -1,6 +1,6 @@
 import {OffersOrder} from "../../const";
 import {ActionType} from "../action";
-import {getOffersFilteredByCity} from "../../utils";
+import {getOffersByCity} from "./selectors";
 
 const initialState = {
   city: null,
@@ -18,10 +18,11 @@ const initialState = {
   favoriteOffers: [],
 };
 
+
 const hotel = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY:
-      const offers = getOffersFilteredByCity(state.hotels, action.payload);
+      const offers = getOffersByCity(state.hotels, action.payload);
       return {
         ...state,
         offers,
@@ -76,7 +77,7 @@ const hotel = (state = initialState, action) => {
           : state.favoriteOffers.filter((offer)=>(offer.id !== action.payload.id)),
         openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : null,
         hotels,
-        offers: getOffersFilteredByCity(hotels, state.city),
+        offers: getOffersByCity(hotels, state.city),
       };
   }
   return state;
