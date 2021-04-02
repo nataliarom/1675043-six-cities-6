@@ -60,7 +60,7 @@ FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferProps)),
   isFavoritesDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
 };
 
 

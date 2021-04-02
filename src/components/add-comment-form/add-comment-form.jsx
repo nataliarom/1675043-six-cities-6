@@ -23,8 +23,8 @@ const AddCommentForm = ({offerId, onSubmit, error, isSaved}) => {
   };
 
   useEffect(() => {
-
     if (isSaving && error) {
+
       setIsSaving(false);
     }
     if (isSaving && isSaved) {
@@ -32,7 +32,7 @@ const AddCommentForm = ({offerId, onSubmit, error, isSaved}) => {
       setComment(``);
       setIsSaving(false);
     }
-  }, [error, isSaved]);
+  }, [error, isSaved, isSaving]);
 
 
   const handleRatingChange = (evt) => {

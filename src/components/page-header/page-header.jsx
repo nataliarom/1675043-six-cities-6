@@ -40,7 +40,7 @@ const PageHeader = ({authorizationStatus, authInfo}) => {
 };
 
 PageHeader.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
   authInfo: PropTypes.shape(AuthInfoProps)
 };
 

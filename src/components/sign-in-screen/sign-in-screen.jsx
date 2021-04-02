@@ -70,7 +70,7 @@ const SignInScreen = ({onSubmit, authorizationStatus}) => {
 
 
 SignInScreen.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

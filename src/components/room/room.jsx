@@ -12,7 +12,7 @@ import {MapNearby} from "../map/map-nearby";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
 import PageNotFound from "../page-not-found/page-not-found";
 
-// TODO replace string with enum in props like apartment, room, house, hotel.
+
 const Room = ({id, openedOffer, onLoadData, isError}) => {
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {openedOffer && (openedOffer.type.charAt(0).toUpperCase() + openedOffer.type.substr(1).toLowerCase())}
+                  {openedOffer && openedOffer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {openedOffer && openedOffer.bedrooms} Bedrooms

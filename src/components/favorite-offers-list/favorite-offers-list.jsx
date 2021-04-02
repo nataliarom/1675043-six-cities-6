@@ -11,7 +11,7 @@ const FavoriteOffers = ({favoriteOffers}) => {
     [...new Set(offers.map((offer)=>(offer.city.name)))]
   );
 
-  const getOffersByCity = (offers) => {
+  const getOffersGroupedByCity = (offers) => {
     let cities = getCities(offers);
     return cities.reduce((cityToOffers, city) => {
       cityToOffers[city] = offers.filter((offer) => (offer.city.name === city));
@@ -19,7 +19,7 @@ const FavoriteOffers = ({favoriteOffers}) => {
     }, {});
   };
 
-  const offersByCity = getOffersByCity(favoriteOffers);
+  const offersByCity = getOffersGroupedByCity(favoriteOffers);
 
   return (
     <ul className="favorites__list">
@@ -39,7 +39,7 @@ const FavoriteOffers = ({favoriteOffers}) => {
                   price={offer.price}
                   previewImage={offer.previewImage}
                   type={offer.type}
-                  key={offer.id}
+                  key={`favorite` + offer.id}
                   id={offer.id}
                   rating={offer.rating}
                 />)}

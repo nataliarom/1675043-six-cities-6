@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {CityProps} from "../../types/city-props";
 import {OfferProps} from "../../types/offer-props";
+import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const Map = ({className, currentCity, offers, activeOfferId}) => {
 
@@ -24,6 +25,8 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
 
   const updateMap = () => {
     mapRef.current.setView(coordinates, zoom);
+
+
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -51,6 +54,14 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
   }, []);
 
   useEffect(() => {
+    mapRef.current.eachLayer((layer)=>{
+      layer.remove();
+    });
+
+    updateMap();
+  }, [offers]);
+
+  useEffect(() => {
     updateMap();
   }, [currentCity, offers, activeOfferId]);
 
@@ -63,7 +74,7 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
 const mapStateToProps = ({HOTEL}) => {
   return {
     currentCity: HOTEL.city,
-    offers: HOTEL.offers,
+    offers: getOffersFilteredByCity(HOTEL),
     activeOfferId: HOTEL.activeOfferId
   };
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {getPhotosForOffer} from "../../store/hotel/selectors";
 
 const PhotoGallery = ({images}) => {
 
@@ -8,7 +9,7 @@ const PhotoGallery = ({images}) => {
     <div className="property__gallery-container container">
       <div className="property__gallery">
         {images && images.map((imageUrl)=>(
-          <div key={imageUrl} className="property__image-wrapper">
+          <div key={`image-` + imageUrl} className="property__image-wrapper">
             <img className="property__image" src={imageUrl} alt="Photo studio"/>
           </div>
         ))}
@@ -24,7 +25,7 @@ PhotoGallery.propTypes = {
 
 const mapStateToProps = ({HOTEL}) => {
   return {
-    images: HOTEL.openedOffer.images.slice(0, 6),
+    images: getPhotosForOffer(HOTEL),
   };
 };
 

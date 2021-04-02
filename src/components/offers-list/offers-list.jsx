@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import {ActionCreator} from "../../store/action";
 import {OffersOrder} from "../../const";
 import {OfferProps} from "../../types/offer-props";
+import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 
-export const COMPARE_FUNCTIONS = {
+export const CompareFunction = {
   [OffersOrder.POPULAR]: () => {
     return 0;
   },
@@ -26,7 +27,7 @@ const OffersList = ({className, offers, onActiveCardSelection, offersOrder}) => 
 
   return (
     <div className={className}>
-      {[...offers].sort(COMPARE_FUNCTIONS[offersOrder]).map((offer) => <OfferCard
+      {[...offers].sort(CompareFunction[offersOrder]).map((offer) => <OfferCard
         title={offer.title}
         isPremium={offer.isPremium}
         price={offer.price}
@@ -44,7 +45,7 @@ const OffersList = ({className, offers, onActiveCardSelection, offersOrder}) => 
 
 const mapStateToProps = ({HOTEL}) => {
   return {
-    offers: HOTEL.offers,
+    offers: getOffersFilteredByCity(HOTEL),
     activeOfferId: HOTEL.activeOfferId,
     offersOrder: HOTEL.offersOrder,
   };

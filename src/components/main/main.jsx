@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {fetchOffersList} from "../../store/api-actions";
 import CityOffers from "../city-offers/city-offers";
 import PageHeader from "../page-header/page-header";
+import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const Main = ({isDataLoaded, onLoadData, offersCount}) => {
   // const history = useHistory(); for future usage
@@ -46,7 +47,7 @@ Main.propTypes = {
 
 const mapStateToProps = ({HOTEL}) => ({
   isDataLoaded: HOTEL.isDataLoaded,
-  offersCount: HOTEL.offersCount
+  offersCount: getOffersFilteredByCity(HOTEL).length
 });
 
 const mapDispatchToProps = (dispatch) => ({

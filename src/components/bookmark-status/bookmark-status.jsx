@@ -29,7 +29,7 @@ BookmarkStatus.propTypes = {
   onUpdateBookmarkStatus: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   bookmarkStatus: PropTypes.number.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
   height: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
 };

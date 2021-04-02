@@ -6,6 +6,7 @@ import OffersCount from "../offers-count/offers-count";
 import {connect} from "react-redux";
 import {CityProps} from "../../types/city-props";
 import OffersSortingOrder from "../offers-sorting-order/offers-sorting-order";
+import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const CityOffers = ({city, offersCount}) => {
 
@@ -45,7 +46,7 @@ CityOffers.propTypes = {
 
 const mapStateToProps = ({HOTEL}) => {
   return {
-    offersCount: HOTEL.offersCount,
+    offersCount: getOffersFilteredByCity(HOTEL).length,
     city: HOTEL.city,
   };
 };

@@ -5,12 +5,13 @@ import ReviewsListItem from "../reviews-list-item/review-list-item";
 import {ReviewProps} from "../../types/review-props";
 import AddCommentForm from "../add-comment-form/add-comment-form";
 import {AuthorizationStatus} from "../../const";
+import {getReviewsCount, getTop10NewReviews} from "../../store/review/selectors";
 
 
-const ReviewsList = ({authorizationStatus, reviews, offerId}) => {
+const ReviewsList = ({authorizationStatus, reviews, offerId, reviewsCount}) => {
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews && reviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
       <ul className="reviews__list">
         {reviews && reviews.map((review) => <ReviewsListItem
           comment={review.comment}
@@ -29,16 +30,17 @@ const ReviewsList = ({authorizationStatus, reviews, offerId}) => {
 
 ReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape(ReviewProps)),
-  authorizationStatus: PropTypes.string.isRequired,
-  offerId: PropTypes.number.isRequired
+  authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
+  offerId: PropTypes.number.isRequired,
+  reviewsCount: PropTypes.number.isRequired,
 };
 
-// TODO Sort reviews by date, newest on top
 const mapStateToProps = ({REVIEW, USER, HOTEL}) => {
   return {
-    reviews: REVIEW.reviews.slice(0, 10),
+    reviews: getTop10NewReviews(REVIEW),
     authorizationStatus: USER.authorizationStatus,
-    offerId: HOTEL.openedOffer.id
+    offerId: HOTEL.openedOffer.id,
+    reviewsCount: getReviewsCount(REVIEW)
   };
 };
 

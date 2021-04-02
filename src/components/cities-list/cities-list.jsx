@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {CityProps} from "../../types/city-props";
 import {connect} from "react-redux";
+import {getCities} from "../../store/hotel/selectors";
 
 const CitiesList = ({cities, currentCity, onCitySelect}) => {
   return (
@@ -32,14 +33,13 @@ const CitiesList = ({cities, currentCity, onCitySelect}) => {
 const mapStateToProps = ({HOTEL}) => {
   return {
     currentCity: HOTEL.city,
-    cities: HOTEL.cities
+    cities: getCities(HOTEL)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onCitySelect(city) {
     dispatch(ActionCreator.setCity(city));
-    dispatch(ActionCreator.filterHotelsByCity(city));
   },
 });
 
