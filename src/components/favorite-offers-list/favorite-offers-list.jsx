@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {OfferProps} from "../../types/offer-props";
+import {OfferType} from "../../types/offer-type";
 import FavoriteOfferCard from "../favorite-offer-card/favorite-offer-card";
-import {fetchFavoriteHotels} from "../../store/api-actions";
+import {fetchFavoriteHotels} from "../../store/hotel/api-action";
 
 const FavoriteOffers = ({favoriteOffers}) => {
 
@@ -39,7 +39,7 @@ const FavoriteOffers = ({favoriteOffers}) => {
                   price={offer.price}
                   previewImage={offer.previewImage}
                   type={offer.type}
-                  key={`favorite` + offer.id}
+                  key={`favorite-${offer.id}`}
                   id={offer.id}
                   rating={offer.rating}
                 />)}
@@ -52,7 +52,7 @@ const FavoriteOffers = ({favoriteOffers}) => {
 };
 
 FavoriteOffers.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferProps))
+  favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferType))
 };
 
 

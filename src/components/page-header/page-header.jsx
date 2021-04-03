@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../const";
-import {AuthInfoProps} from "../../types/auth-info-props";
+import {AuthInfoType} from "../../types/auth-info-type";
 
 const PageHeader = ({authorizationStatus, authInfo}) => {
 
@@ -41,7 +41,7 @@ const PageHeader = ({authorizationStatus, authInfo}) => {
 
 PageHeader.propTypes = {
   authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
-  authInfo: PropTypes.shape(AuthInfoProps)
+  authInfo: PropTypes.shape(AuthInfoType)
 };
 
 const mapStateToProps = ({USER}) => {

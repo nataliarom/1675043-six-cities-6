@@ -1,4 +1,4 @@
-import {ActionType} from "../action";
+import {ReviewActionType} from "./action";
 
 
 const initialState = {
@@ -6,20 +6,20 @@ const initialState = {
   reviewError: null,
   reviewSaved: false
 };
-const review = (state = initialState, action) => {
+const reviewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_REVIEWS:
+    case ReviewActionType.LOAD_REVIEWS:
       return {
         ...state,
         reviews: action.payload
       };
-    case ActionType.SET_REVIEW_ERROR:
+    case ReviewActionType.SET_REVIEW_ERROR:
       return {
         ...state,
         reviewSaved: false,
         reviewError: action.payload
       };
-    case ActionType.SET_REVIEW_SUCCESS:
+    case ReviewActionType.SET_REVIEW_SUCCESS:
       return {
         ...state,
         reviewSaved: true,
@@ -30,4 +30,4 @@ const review = (state = initialState, action) => {
   return state;
 };
 
-export {review};
+export default reviewReducer;

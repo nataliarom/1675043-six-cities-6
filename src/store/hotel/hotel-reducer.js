@@ -1,5 +1,5 @@
 import {OffersOrder} from "../../const";
-import {ActionType} from "../action";
+import {HotelActionType} from "./action";
 
 
 const initialState = {
@@ -16,48 +16,48 @@ const initialState = {
 };
 
 
-const hotel = (state = initialState, action) => {
+const hotelReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.SET_CITY:
+    case HotelActionType.SET_CITY:
       return {
         ...state,
         city: action.payload,
       };
-    case ActionType.LOAD_HOTELS:
+    case HotelActionType.LOAD_HOTELS:
       return {
         ...state,
         hotels: action.payload,
         isDataLoaded: true
       };
-    case ActionType.SET_ACTIVE_OFFER:
+    case HotelActionType.SET_ACTIVE_OFFER:
       return {
         ...state,
         activeOfferId: action.payload
       };
-    case ActionType.SET_OFFERS_ORDER:
+    case HotelActionType.SET_OFFERS_ORDER:
       return {
         ...state,
         offersOrder: action.payload
       };
-    case ActionType.LOAD_HOTEL_BY_ID:
+    case HotelActionType.LOAD_HOTEL_BY_ID:
       return {
         ...state,
         openedOffer: action.payload,
         loadOfferError: null
       };
-    case ActionType.LOAD_NEARBY_HOTELS:
+    case HotelActionType.LOAD_NEARBY_HOTELS:
       return {
         ...state,
         nearbyOffers: action.payload,
         activeOfferId: state.openedOffer.id,
       };
-    case ActionType.LOAD_FAVORITE_HOTELS:
+    case HotelActionType.LOAD_FAVORITE_HOTELS:
       return {
         ...state,
         favoriteOffers: action.payload,
         isFavoritesDataLoaded: true,
       };
-    case ActionType.UPDATE_FAVORITE_STATUS:
+    case HotelActionType.UPDATE_FAVORITE_STATUS:
       return {
         ...state,
         favoriteOffers: action.payload.isFavorite
@@ -66,7 +66,7 @@ const hotel = (state = initialState, action) => {
         openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : null,
         hotels: state.hotels.map((h)=>(h.id === action.payload.id ? action.payload : h)),
       };
-    case ActionType.SET_OFFER_404_ERROR:
+    case HotelActionType.SET_OFFER_404_ERROR:
       return {
         ...state,
         loadOfferError: action.payload,
@@ -76,4 +76,4 @@ const hotel = (state = initialState, action) => {
   return state;
 };
 
-export {hotel};
+export default hotelReducer;

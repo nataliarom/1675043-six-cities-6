@@ -1,6 +1,6 @@
 import {number, string, bool} from 'prop-types';
 
-export const AuthInfoProps = {
+export const AuthInfoType = {
   email: string.isRequired,
   id: number.isRequired,
   name: string.isRequired,

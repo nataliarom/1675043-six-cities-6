@@ -9,7 +9,7 @@ const PhotoGallery = ({images}) => {
     <div className="property__gallery-container container">
       <div className="property__gallery">
         {images && images.map((imageUrl)=>(
-          <div key={`image-` + imageUrl} className="property__image-wrapper">
+          <div key={`image-${imageUrl}`} className="property__image-wrapper">
             <img className="property__image" src={imageUrl} alt="Photo studio"/>
           </div>
         ))}

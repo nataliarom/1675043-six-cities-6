@@ -6,13 +6,13 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-import {ActionCreator} from "./store/action";
-import {checkAuth} from "./store/api-actions";
+import {checkAuth} from "./store/user/api-action";
 import {redirect} from "./store/middlewares/redirect";
 import rootReducer from './store/root-reducer';
+import {unauthorize} from "./store/user/action";
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.unauthorize())
+    () => store.dispatch(unauthorize())
 );
 
 

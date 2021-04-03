@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {OffersList} from "./offers-list";
+import {OffersList} from "../offers-list/offers-list";
 
 
 const mapStateToProps = ({HOTEL}) => {

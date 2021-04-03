@@ -2,15 +2,17 @@ import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import PageHeader from "../page-header/page-header";
 import ReviewsList from "../reviews-list/review-list";
-import {addToFavorites, fetchNearbyOffers, fetchOfferById, fetchReviews} from "../../store/api-actions";
-import {OfferProps} from "../../types/offer-props";
+import {addToFavorites, fetchNearbyOffers, fetchOfferById} from "../../store/hotel/api-action";
+import {fetchReviews} from "../../store/review/api-action";
+import {OfferType} from "../../types/offer-type";
 import LoadingScreen from "../loading-screen/loading-screen";
 import {connect} from "react-redux";
 import PhotoGallery from "../photo-gallery/photo-gallery";
-import {OffersListNearby} from "../offers-list/offers-list-nearby";
-import {MapNearby} from "../map/map-nearby";
+import {OffersListNearby} from "../offers-list-nearby/offers-list-nearby";
+import {MapNearby} from "../map-nearby/map-nearby";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
 import PageNotFound from "../page-not-found/page-not-found";
+import {BookmarkStatusOption, RATING_STAR_WIDTH} from "../../const";
 
 
 const Room = ({id, openedOffer, onLoadData, isError}) => {
@@ -51,11 +53,11 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
                   width="31"
                   height="33"
                   offerId={openedOffer.id}
-                  bookmarkStatus={openedOffer.isFavorite ? 1 : 0} />
+                  bookmarkStatus={openedOffer.isFavorite ? BookmarkStatusOption.FAVORITE : BookmarkStatusOption.NOT_FAVORITE} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${openedOffer && openedOffer.rating * 20}%`}}/>
+                  <span style={{width: `${openedOffer && openedOffer.rating * RATING_STAR_WIDTH}%`}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{openedOffer && openedOffer.rating}</span>
@@ -79,7 +81,7 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {openedOffer && openedOffer.goods.map((good)=>
-                    <li key={`good-` + good} className="property__inside-item">
+                    <li key={`good-${good}`} className="property__inside-item">
                       {good}
                     </li>)}
                 </ul>
@@ -92,6 +94,9 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
                   </div>
                   <span className="property__user-name">
                     {openedOffer && openedOffer.host.name}</span>
+                  {openedOffer && openedOffer.host.isPro ? <span className="property__user-status">
+                    Pro
+                  </span> : ``}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -118,7 +123,7 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
 
 Room.propTypes = {
   id: PropTypes.number.isRequired,
-  openedOffer: PropTypes.shape(OfferProps),
+  openedOffer: PropTypes.shape(OfferType),
   onLoadData: PropTypes.func.isRequired,
   onAddToBookmarks: PropTypes.func.isRequired,
   isError: PropTypes.object,

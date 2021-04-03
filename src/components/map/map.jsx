@@ -3,13 +3,18 @@ import "leaflet/dist/leaflet.css";
 import leaflet from 'leaflet';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {CityProps} from "../../types/city-props";
-import {OfferProps} from "../../types/offer-props";
+import {CityType} from "../../types/city-type";
+import {OfferType} from "../../types/offer-type";
 import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const Map = ({className, currentCity, offers, activeOfferId}) => {
 
   const mapRef = useRef();
+  const MAP_PARAMS = {
+    URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+    ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+  };
+
   const icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
     iconSize: [30, 30]
@@ -22,25 +27,6 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
   const coordinates = [currentCity.location.latitude, currentCity.location.longitude];
   const zoom = currentCity.location.zoom;
 
-
-  const updateMap = () => {
-    mapRef.current.setView(coordinates, zoom);
-
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(mapRef.current);
-
-    offers.forEach((offer) => {
-      leaflet
-        .marker([offer.location.latitude, offer.location.longitude],
-            {icon: activeOfferId === offer.id ? iconActive : icon})
-        .addTo(mapRef.current);
-    });
-  };
-
   useEffect(() => {
 
     mapRef.current = leaflet.map(`map`, {
@@ -49,8 +35,11 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
       zoomControl: false,
       marker: true
     });
-
     updateMap();
+
+    return () => {
+      mapRef.current.remove();
+    };
   }, []);
 
   useEffect(() => {
@@ -65,10 +54,34 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
     updateMap();
   }, [currentCity, offers, activeOfferId]);
 
+  const updateMap = () => {
+    mapRef.current.setView(coordinates, zoom);
+
+    leaflet
+      .tileLayer(MAP_PARAMS.URL, {
+        attribution: MAP_PARAMS.ATTRIBUTION
+      })
+      .addTo(mapRef.current);
+
+    offers.forEach((offer) => {
+      leaflet
+        .marker([offer.location.latitude, offer.location.longitude],
+            {icon: activeOfferId === offer.id ? iconActive : icon})
+        .addTo(mapRef.current);
+    });
+  };
+
   return (
-    <section ref={mapRef} id="map" className={className + ` map`}/>
+    <section ref={mapRef} id="map" className={`${className} map`}/>
   );
 
+};
+
+Map.propTypes = {
+  offers: PropTypes.arrayOf(PropTypes.shape(OfferType)).isRequired,
+  currentCity: PropTypes.shape(CityType).isRequired,
+  activeOfferId: PropTypes.number.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({HOTEL}) => {
@@ -77,13 +90,6 @@ const mapStateToProps = ({HOTEL}) => {
     offers: getOffersFilteredByCity(HOTEL),
     activeOfferId: HOTEL.activeOfferId
   };
-};
-
-Map.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(OfferProps)).isRequired,
-  currentCity: PropTypes.shape(CityProps).isRequired,
-  activeOfferId: PropTypes.number.isRequired,
-  className: PropTypes.string.isRequired,
 };
 
 export {Map};

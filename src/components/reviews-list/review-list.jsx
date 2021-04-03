@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import ReviewsListItem from "../reviews-list-item/review-list-item";
-import {ReviewProps} from "../../types/review-props";
+import {ReviewType} from "../../types/review-type";
 import AddCommentForm from "../add-comment-form/add-comment-form";
 import {AuthorizationStatus} from "../../const";
-import {getReviewsCount, getTop10NewReviews} from "../../store/review/selectors";
+import {getReviewsCount, getTopNewReviews} from "../../store/review/selectors";
 
 
 const ReviewsList = ({authorizationStatus, reviews, offerId, reviewsCount}) => {
@@ -17,7 +17,7 @@ const ReviewsList = ({authorizationStatus, reviews, offerId, reviewsCount}) => {
           comment={review.comment}
           date={review.date}
           id={review.id}
-          key={`review_item_` + review.id}
+          key={`review-${review.id}`}
           rating={review.rating}
           user={review.user}
         />)}
@@ -29,7 +29,7 @@ const ReviewsList = ({authorizationStatus, reviews, offerId, reviewsCount}) => {
 };
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape(ReviewProps)),
+  reviews: PropTypes.arrayOf(PropTypes.shape(ReviewType)),
   authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
   offerId: PropTypes.number.isRequired,
   reviewsCount: PropTypes.number.isRequired,
@@ -37,7 +37,7 @@ ReviewsList.propTypes = {
 
 const mapStateToProps = ({REVIEW, USER, HOTEL}) => {
   return {
-    reviews: getTop10NewReviews(REVIEW),
+    reviews: getTopNewReviews(REVIEW),
     authorizationStatus: USER.authorizationStatus,
     offerId: HOTEL.openedOffer.id,
     reviewsCount: getReviewsCount(REVIEW)

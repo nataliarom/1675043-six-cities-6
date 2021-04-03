@@ -3,12 +3,13 @@ import React, {useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import PropTypes from "prop-types";
 import PageHeader from "../page-header/page-header";
-import {checkAuth, fetchFavoriteHotels} from "../../store/api-actions";
+import {checkAuth} from "../../store/user/api-action";
+import {fetchFavoriteHotels} from "../../store/hotel/api-action";
 import {connect} from "react-redux";
 import LoadingScreen from "../loading-screen/loading-screen";
-import FavoriteOffersEmpty from "../favorite-offers-list/favorire-offers-empty";
+import FavoriteOffersEmptyList from "../favorite-offers-empty-list/favorire-offers-empty-list";
 import FavoriteOffers from "../favorite-offers-list/favorite-offers-list";
-import {OfferProps} from "../../types/offer-props";
+import {OfferType} from "../../types/offer-type";
 import {AppRoute, AuthorizationStatus} from "../../const";
 
 
@@ -46,7 +47,7 @@ const FavoritesPage = ({authorizationStatus, favoriteOffers, isFavoritesDataLoad
             </section>
           </div>
         </main>
-        : <FavoriteOffersEmpty/>}
+        : <FavoriteOffersEmptyList/>}
       <footer className="footer container">
         <Link className="footer__logo-link" to="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
@@ -57,7 +58,7 @@ const FavoritesPage = ({authorizationStatus, favoriteOffers, isFavoritesDataLoad
 };
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferProps)),
+  favoriteOffers: PropTypes.arrayOf(PropTypes.shape(OfferType)),
   isFavoritesDataLoaded: PropTypes.bool.isRequired,
   onLoadData: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const FavoriteOffersEmpty = () => {
+const FavoriteOffersEmptyList = () => {
 
   return (
     <main className="page__main page__main--favorites page__main--favorites-empty">
@@ -20,5 +20,5 @@ const FavoriteOffersEmpty = () => {
 };
 
 
-export default FavoriteOffersEmpty;
+export default FavoriteOffersEmptyList;
 

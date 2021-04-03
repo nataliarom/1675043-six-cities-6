@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const OfferProps = {
+export const OfferType = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

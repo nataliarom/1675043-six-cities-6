@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {addToFavorites} from "../../store/api-actions";
-import {AppRoute, AuthorizationStatus} from "../../const";
-import {ActionCreator} from "../../store/action";
+import {addToFavorites} from "../../store/hotel/api-action";
+import {AppRoute, AuthorizationStatus, BookmarkStatusOption} from "../../const";
+import {redirectToRoute} from "../../store/user/action";
 
 
 const BookmarkStatus = ({className, width, height, offerId, bookmarkStatus, authorizationStatus, onUpdateBookmarkStatus}) => {
 
   const handleAddToBookmarks = (evt) => {
     evt.preventDefault();
-    onUpdateBookmarkStatus(offerId, bookmarkStatus ? 0 : 1, authorizationStatus);
+    onUpdateBookmarkStatus(offerId, bookmarkStatus ? BookmarkStatusOption.NOT_FAVORITE : BookmarkStatusOption.FAVORITE, authorizationStatus);
   };
 
   return (
@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch) => ({
     if (authorizationStatus === AuthorizationStatus.AUTH) {
       dispatch(addToFavorites({offerId, status: bookmarkStatus}));
     } else {
-      dispatch(ActionCreator.redirectToRoute(AppRoute.LOGIN));
+      dispatch(redirectToRoute(AppRoute.LOGIN));
     }
   }
 });

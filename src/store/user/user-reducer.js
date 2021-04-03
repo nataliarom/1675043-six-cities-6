@@ -1,20 +1,20 @@
 import {AuthorizationStatus} from "../../const";
-import {ActionType} from "../action";
-
+import {UserActionType} from "./action";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: null,
 };
-const user = (state = initialState, action) => {
+
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.UNAUTHORIZE:
+    case UserActionType.UNAUTHORIZE:
       return {
         ...state,
         authorizationStatus: AuthorizationStatus.NO_AUTH,
         authInfo: null
       };
-    case ActionType.AUTHORIZE:
+    case UserActionType.AUTHORIZE:
       return {
         ...state,
         authInfo: action.payload,
@@ -25,4 +25,4 @@ const user = (state = initialState, action) => {
   return state;
 };
 
-export {user};
+export default userReducer;

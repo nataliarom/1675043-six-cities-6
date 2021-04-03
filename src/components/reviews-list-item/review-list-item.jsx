@@ -1,15 +1,8 @@
-import {ReviewProps} from "../../types/review-props";
+import {ReviewType} from "../../types/review-type";
 import React from 'react';
+import {getReviewDateString} from "../../utils";
+import {RATING_STAR_WIDTH} from "../../const";
 
-const getReviewDateString = (date) => {
-  try {
-    let d = new Date(date);
-    const months = [`January`, `February`, `March`, `April`, `May`, `Jun`, `July`, `August`, `September`, `October`, `November`, `December`];
-    return months[d.getMonth()] + ` ` + d.getFullYear();
-  } catch (e) {
-    return ``;
-  }
-};
 
 const ReviewsListItem = ({comment, date, rating, user}) => {
   return (
@@ -26,7 +19,7 @@ const ReviewsListItem = ({comment, date, rating, user}) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}} />
+            <span style={{width: `${rating * RATING_STAR_WIDTH}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -42,4 +35,4 @@ const ReviewsListItem = ({comment, date, rating, user}) => {
 
 export default ReviewsListItem;
 
-ReviewsListItem.propTypes = ReviewProps;
+ReviewsListItem.propTypes = ReviewType;

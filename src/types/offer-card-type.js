@@ -1,6 +1,6 @@
 import {number, string, bool} from 'prop-types';
 
-export const OfferCardProps = {
+export const OfferCardType = {
   title: string.isRequired,
   price: number.isRequired,
   isPremium: bool.isRequired,

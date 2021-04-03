@@ -1,16 +1,14 @@
 import React, {useEffect} from 'react';
-// import {useHistory} from 'react-router-dom';
 import PropTypes from "prop-types";
 import CitiesList from "../cities-list/cities-list";
 import LoadingScreen from "../loading-screen/loading-screen";
 import {connect} from "react-redux";
-import {fetchOffersList} from "../../store/api-actions";
-import CityOffers from "../city-offers/city-offers";
+import {fetchOffersList} from "../../store/hotel/api-action";
+import CityOffers from "../city-offers-list/city-offers-list";
 import PageHeader from "../page-header/page-header";
 import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const Main = ({isDataLoaded, onLoadData, offersCount}) => {
-  // const history = useHistory(); for future usage
 
   useEffect(() => {
     if (!isDataLoaded) {

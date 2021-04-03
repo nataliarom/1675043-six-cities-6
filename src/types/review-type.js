@@ -1,6 +1,6 @@
 import {number, string, bool, shape} from 'prop-types';
 
-export const ReviewProps = {
+export const ReviewType = {
 
   comment: string.isRequired,
   date: string.isRequired,

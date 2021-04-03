@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {OfferCardProps} from "../../types/offer-card-props";
+import {OfferCardType} from "../../types/offer-card-type";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
+import {BookmarkStatusOption, RATING_STAR_WIDTH} from "../../const";
 
 const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isFavorite, onOfferCardSelection}) => {
+
 
   return (
 
@@ -30,12 +32,12 @@ const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isF
             width="18"
             height="19"
             offerId={id}
-            bookmarkStatus={isFavorite ? 1 : 0} />
+            bookmarkStatus={isFavorite ? BookmarkStatusOption.FAVORITE : BookmarkStatusOption.NOT_FAVORITE} />
 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}/>
+            <span style={{width: `${rating * RATING_STAR_WIDTH}%`}}/>
             <span className="visually-hidden">Rating {rating}</span>
           </div>
         </div>
@@ -47,7 +49,7 @@ const OfferCard = ({id, title, price, isPremium, type, previewImage, rating, isF
     </article>
   );
 };
-OfferCard.propTypes = {...OfferCardProps,
+OfferCard.propTypes = {...OfferCardType,
   onOfferCardSelection: PropTypes.func.isRequired
 };
 export default OfferCard;

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {FavoriteOfferCardProps} from "../../types/favorite-offer-card-props";
+import {FavoriteOfferCardType} from "../../types/favorite-offer-card-type";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
+import {BookmarkStatusOption} from "../../const";
 
 const FavoriteOfferCard = ({id, title, price, type, previewImage, rating}) => {
 
@@ -24,7 +25,7 @@ const FavoriteOfferCard = ({id, title, price, type, previewImage, rating}) => {
             width="18"
             height="19"
             offerId={id}
-            bookmarkStatus={1} />
+            bookmarkStatus={BookmarkStatusOption.FAVORITE} />
 
         </div>
         <div className="place-card__rating rating">
@@ -41,5 +42,5 @@ const FavoriteOfferCard = ({id, title, price, type, previewImage, rating}) => {
     </article>
   );
 };
-FavoriteOfferCard.propTypes = FavoriteOfferCardProps;
+FavoriteOfferCard.propTypes = FavoriteOfferCardType;
 export default FavoriteOfferCard;

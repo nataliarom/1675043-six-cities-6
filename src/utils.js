@@ -32,7 +32,7 @@ export const createHotelFromApi = (hotel) => {
     price: hotel.price,
     rating: Math.round(hotel.rating),
     title: hotel.title,
-    type: hotel.type.charAt(0).toUpperCase() + hotel.type.substr(1).toLowerCase(),
+    type: `${hotel.type.charAt(0).toUpperCase()}${hotel.type.substr(1).toLowerCase()}`,
   };
 };
 
@@ -58,4 +58,31 @@ export const createAuthInfoFromApi = (authInfo) => {
     isPro: authInfo.is_pro,
     name: authInfo.name
   };
+};
+
+
+export const getCitiesFromHotelsList = (hotels) => {
+  let cities = [];
+  hotels.forEach((offer)=> {
+    if (cities.findIndex((city) => city.name === offer.city.name) < 0) {
+      cities.push(offer.city);
+    }
+  });
+  return cities;
+};
+
+export const getOffersByCity = (city, hotels) => {
+  return hotels.filter((hotel) => {
+    return hotel.city.name === city.name;
+  });
+};
+
+export const sortReviewsByDate = (review1, review2) => {
+  return Date.parse(review2.date) - Date.parse(review1.date);
+};
+
+export const getReviewDateString = (date) => {
+  let dateValue = new Date(date);
+  const month = dateValue.toLocaleString(`default`, {month: `long`});
+  return `${month} ${dateValue.getFullYear()}`;
 };

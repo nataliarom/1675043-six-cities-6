@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
-import {CityProps} from "../../types/city-props";
+import {CityType} from "../../types/city-type";
 import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
 const OffersCount = ({offersCount, currentCity}) => {
+
+  const ONE_OFFER = 1;
   return (
-    <b className="places__found">{offersCount} {offersCount === 1 ? `place` : `places`} to stay in {currentCity.name}</b>
+    <b className="places__found">{offersCount} {offersCount === ONE_OFFER ? `place` : `places`} to stay in {currentCity.name}</b>
   );
 };
 const mapStateToProps = ({HOTEL}) => {
@@ -21,7 +23,7 @@ export {OffersCount};
 export default connect(mapStateToProps)(OffersCount);
 
 OffersCount.propTypes = {
-  currentCity: PropTypes.shape(CityProps).isRequired,
+  currentCity: PropTypes.shape(CityType).isRequired,
   offersCount: PropTypes.number.isRequired
 };
 

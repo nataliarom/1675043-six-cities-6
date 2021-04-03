@@ -1,3 +1,8 @@
+export const MAX_PHOTO_LIST_SIZE = 6;
+export const MAX_REVIEW_LIST_SIZE = 10;
+export const DEFAULT_CITY_INDEX = 0;
+export const RATING_STAR_WIDTH = 20;
+
 export const OffersOrder = {
   POPULAR: `Popular`,
   LOW_TO_HIGH: `Price: low to high`,
@@ -26,3 +31,10 @@ export const APIRoute = {
   FAVORITE_HOTELS: `/favorite/`,
   FAVORITE_HOTELS_UPDATE: `/favorite/:id/:status`
 };
+
+export const BookmarkStatusOption = {
+  NOT_FAVORITE: 0,
+  FAVORITE: 1
+};
+
+

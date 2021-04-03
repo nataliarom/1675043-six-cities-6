@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const CityLocationProps = {
+export const CityLocationType = {
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
   zoom: PropTypes.number.isRequired

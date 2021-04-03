@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 import Map from "../map/map";
 import OffersCount from "../offers-count/offers-count";
 import {connect} from "react-redux";
-import {CityProps} from "../../types/city-props";
+import {CityType} from "../../types/city-type";
 import OffersSortingOrder from "../offers-sorting-order/offers-sorting-order";
 import {getOffersFilteredByCity} from "../../store/hotel/selectors";
+import OffersEmptyList from "../offers-empty-list/offers-empty-list";
 
-const CityOffers = ({city, offersCount}) => {
+const CityOffersList = ({city, offersCount}) => {
 
   return (
 
@@ -25,23 +26,13 @@ const CityOffers = ({city, offersCount}) => {
         </div>
       </div>
       :
-      <div className="cities__places-container container cities__places-container--empty">
-        <section className="cities__no-places">
-          <div className="cities__status-wrapper tabs__content">
-            <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property available at the moment in
-              {city && city.name} </p>
-          </div>
-        </section>
-        <div className="cities__right-section page page__main--index-empty">
-        </div>
-      </div>
+      <OffersEmptyList city={city}/>
   );
 };
 
-CityOffers.propTypes = {
+CityOffersList.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  city: PropTypes.shape(CityProps),
+  city: PropTypes.shape(CityType),
 };
 
 const mapStateToProps = ({HOTEL}) => {
@@ -51,5 +42,5 @@ const mapStateToProps = ({HOTEL}) => {
   };
 };
 
-export {CityOffers};
-export default connect(mapStateToProps)(CityOffers);
+export {CityOffersList};
+export default connect(mapStateToProps)(CityOffersList);

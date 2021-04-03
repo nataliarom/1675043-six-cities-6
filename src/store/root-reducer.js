@@ -1,6 +1,6 @@
-import {hotel} from "./hotel/hotel";
-import {review} from "./review/review";
-import {user} from "./user/user";
+import hotelReducer from "./hotel/hotel-reducer";
+import reviewReducer from "./review/review-reducer";
+import userReducer from "./user/user-reducer";
 import {combineReducers} from "redux";
 
 
@@ -11,7 +11,7 @@ export const NameSpace = {
 };
 
 export default combineReducers({
-  [NameSpace.HOTEL]: hotel,
-  [NameSpace.REVIEW]: review,
-  [NameSpace.USER]: user,
+  [NameSpace.HOTEL]: hotelReducer,
+  [NameSpace.REVIEW]: reviewReducer,
+  [NameSpace.USER]: userReducer,
 });

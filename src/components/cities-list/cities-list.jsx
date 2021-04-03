@@ -1,12 +1,13 @@
 import React from 'react';
-import {ActionCreator} from '../../store/action';
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
-import {CityProps} from "../../types/city-props";
+import {CityType} from "../../types/city-type";
 import {connect} from "react-redux";
 import {getCities} from "../../store/hotel/selectors";
+import {setCity} from "../../store/hotel/action";
 
 const CitiesList = ({cities, currentCity, onCitySelect}) => {
+
   return (
     <div className="tabs">
       <section className="locations container">
@@ -39,14 +40,14 @@ const mapStateToProps = ({HOTEL}) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onCitySelect(city) {
-    dispatch(ActionCreator.setCity(city));
+    dispatch(setCity(city));
   },
 });
 
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.shape(CityProps)),
-  currentCity: PropTypes.shape(CityProps),
+  cities: PropTypes.arrayOf(PropTypes.shape(CityType)),
+  currentCity: PropTypes.shape(CityType),
   onCitySelect: PropTypes.func.isRequired
 };
 

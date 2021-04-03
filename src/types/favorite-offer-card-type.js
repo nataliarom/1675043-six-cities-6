@@ -1,6 +1,6 @@
 import {number, string} from 'prop-types';
 
-export const FavoriteOfferCardProps = {
+export const FavoriteOfferCardType = {
   title: string.isRequired,
   price: number.isRequired,
   previewImage: string,

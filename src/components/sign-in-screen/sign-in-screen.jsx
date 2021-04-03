@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {Redirect} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {login} from "../../store/api-actions";
+import {login} from "../../store/user/api-action";
 import PageHeader from "../page-header/page-header";
 import {AppRoute, AuthorizationStatus} from "../../const";
 
