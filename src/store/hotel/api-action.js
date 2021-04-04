@@ -19,7 +19,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
       dispatch(setCity(data[DEFAULT_CITY_INDEX].city));
       dispatch(loadHotels(data.map((hotel) => (createHotelFromApi(hotel)))));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
       }
@@ -34,7 +34,7 @@ export const fetchOfferById = (offerId) => (dispatch, _getState, api) => (
       }
       dispatch(loadHotelData(createHotelFromApi(data)));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
         return;
@@ -48,7 +48,7 @@ export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
     .then(({data}) => {
       dispatch(loadNearbyHotels(data.map((hotel) => (createHotelFromApi(hotel)))));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
       }
@@ -60,7 +60,7 @@ export const fetchFavoriteHotels = () => (dispatch, _getState, api) => (
     .then(({data}) => {
       dispatch(loadFavoriteHotels(data.map((hotel) => (createHotelFromApi(hotel)))));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
         return;
@@ -75,7 +75,7 @@ export const addToFavorites = ({offerId, status}) => (dispatch, _getState, api) 
     .then(({data}) => {
       dispatch(updateFavoriteStatus(createHotelFromApi(data)));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
         return;

@@ -17,7 +17,7 @@ export const login = ({login: email, password: password}) => (dispatch, _getStat
   api.post(APIRoute.LOGIN, {email, password})
     .then((data) => dispatch(authorize(createAuthInfoFromApi(data.data))))
     .catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
         return;

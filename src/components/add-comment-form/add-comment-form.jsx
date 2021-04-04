@@ -24,13 +24,13 @@ const AddCommentForm = ({offerId, onSubmit, error, isSaved}) => {
 
   useEffect(() => {
     if (isSaving) {
-      if (error) {
-        setIsSaving(false);
-        return;
-      }
       if (isSaved) {
         setRating(0);
         setComment(``);
+        setIsSaving(false);
+        return;
+      }
+      if (error) {
         setIsSaving(false);
       }
     }

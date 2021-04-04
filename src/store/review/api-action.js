@@ -9,7 +9,7 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
     .then(({data}) => {
       dispatch(loadReviews(data.map((comment) => (createCommentFromApi(comment)))));
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
       }
@@ -22,7 +22,7 @@ export const addComment = ({comment: comment, rating: rating, offerId: offerId})
       dispatch(loadReviews(data.map((newComment) => (createCommentFromApi(newComment)))));
       dispatch(setReviewSuccess());
     }).catch((data) => {
-      let error = createErrorFromResponse(data.response);
+      const error = createErrorFromResponse(data.response);
       if (error.isTimeout) {
         dispatch(setApplicationError(error));
         return;
