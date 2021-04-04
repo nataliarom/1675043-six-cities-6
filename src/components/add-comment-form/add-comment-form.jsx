@@ -26,7 +26,9 @@ const AddCommentForm = ({offerId, onSubmit, error, isSaved}) => {
     if (isSaving) {
       if (error) {
         setIsSaving(false);
-      } else if (isSaved) {
+        return;
+      }
+      if (isSaved) {
         setRating(0);
         setComment(``);
         setIsSaving(false);
