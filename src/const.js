@@ -2,6 +2,12 @@ export const MAX_PHOTO_LIST_SIZE = 6;
 export const MAX_REVIEW_LIST_SIZE = 10;
 export const DEFAULT_CITY_INDEX = 0;
 export const RATING_STAR_WIDTH = 20;
+export const TIMEOUT_ERROR_TEXT = `No Internet connection or server is unavailable`;
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404
+};
 
 export const OffersOrder = {
   POPULAR: `Popular`,

@@ -66,7 +66,7 @@ const hotelReducer = (state = initialState, action) => {
         openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : null,
         hotels: state.hotels.map((h)=>(h.id === action.payload.id ? action.payload : h)),
       };
-    case HotelActionType.SET_OFFER_404_ERROR:
+    case HotelActionType.SET_OFFER_ERROR:
       return {
         ...state,
         loadOfferError: action.payload,

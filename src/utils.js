@@ -1,3 +1,4 @@
+import {HttpCode, TIMEOUT_ERROR_TEXT} from "./const";
 
 export const createHotelFromApi = (hotel) => {
   return {
@@ -60,6 +61,16 @@ export const createAuthInfoFromApi = (authInfo) => {
   };
 };
 
+export const createErrorFromResponse = (response) => {
+  return {
+    code: response ? response.status : null,
+    isNotFoundError: response && response.status === HttpCode.NOT_FOUND,
+    isBadRequest: response && response.status === HttpCode.BAD_REQUEST,
+    isUnauthorized: response && response.status === HttpCode.UNAUTHORIZED,
+    isTimeout: !response,
+    message: response ? response.data.error : TIMEOUT_ERROR_TEXT,
+  };
+};
 
 export const getCitiesFromHotelsList = (hotels) => {
   let cities = [];

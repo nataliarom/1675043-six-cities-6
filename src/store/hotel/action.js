@@ -8,7 +8,7 @@ export const HotelActionType = {
   LOAD_NEARBY_HOTELS: `hotel/loadNearby`,
   LOAD_FAVORITE_HOTELS: `hotel/loadFavorite`,
   UPDATE_FAVORITE_STATUS: `hotel/updateFavoriteStatus`,
-  SET_OFFER_404_ERROR: `offer/set404error`,
+  SET_OFFER_ERROR: `offer/setError`,
 };
 
 export const setCity = (city) => ({
@@ -52,6 +52,6 @@ export const updateFavoriteStatus = (hotel) =>({
 });
 
 export const setOfferError = (error) => ({
-  type: HotelActionType.SET_OFFER_404_ERROR,
+  type: HotelActionType.SET_OFFER_ERROR,
   payload: error,
 });

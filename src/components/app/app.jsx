@@ -8,8 +8,17 @@ import PageNotFound from '../page-not-found/page-not-found';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
+import ErrorScreen from "../error-screen/error-screen";
+import PropTypes from "prop-types";
+import {ErrorType} from "../../types/error-type";
+import {connect} from "react-redux";
 
-const App = () => {
+const App = ({applicationError}) => {
+
+  if (applicationError) {
+    return (<ErrorScreen error={applicationError} />);
+  }
+
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -35,4 +44,12 @@ const App = () => {
   );
 };
 
-export default App;
+App.propTypes = {
+  applicationError: PropTypes.shape(ErrorType),
+};
+const mapStateToProps = ({USER}) => ({
+  applicationError: USER.appError,
+});
+export {App};
+export default connect(mapStateToProps)(App);
+

@@ -43,9 +43,9 @@ const mapDispatchToProps = (dispatch) => ({
   onUpdateBookmarkStatus(offerId, bookmarkStatus, authorizationStatus) {
     if (authorizationStatus === AuthorizationStatus.AUTH) {
       dispatch(addToFavorites({offerId, status: bookmarkStatus}));
-    } else {
-      dispatch(redirectToRoute(AppRoute.LOGIN));
+      return;
     }
+    dispatch(redirectToRoute(AppRoute.LOGIN));
   }
 });
 

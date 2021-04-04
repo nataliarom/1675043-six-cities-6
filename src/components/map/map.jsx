@@ -7,13 +7,14 @@ import {CityType} from "../../types/city-type";
 import {OfferType} from "../../types/offer-type";
 import {getOffersFilteredByCity} from "../../store/hotel/selectors";
 
+const MAP_PARAM = {
+  URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+  ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+};
+
 const Map = ({className, currentCity, offers, activeOfferId}) => {
 
   const mapRef = useRef();
-  const MAP_PARAMS = {
-    URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-    ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-  };
 
   const icon = leaflet.icon({
     iconUrl: `img/pin.svg`,
@@ -58,8 +59,8 @@ const Map = ({className, currentCity, offers, activeOfferId}) => {
     mapRef.current.setView(coordinates, zoom);
 
     leaflet
-      .tileLayer(MAP_PARAMS.URL, {
-        attribution: MAP_PARAMS.ATTRIBUTION
+      .tileLayer(MAP_PARAM.URL, {
+        attribution: MAP_PARAM.ATTRIBUTION
       })
       .addTo(mapRef.current);
 

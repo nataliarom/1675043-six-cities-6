@@ -13,9 +13,10 @@ import {MapNearby} from "../map-nearby/map-nearby";
 import BookmarkStatus from "../bookmark-status/bookmark-status";
 import PageNotFound from "../page-not-found/page-not-found";
 import {BookmarkStatusOption, RATING_STAR_WIDTH} from "../../const";
+import {ErrorType} from "../../types/error-type";
 
 
-const Room = ({id, openedOffer, onLoadData, isError}) => {
+const Room = ({id, openedOffer, onLoadData, error}) => {
 
   useEffect(() => {
     if (!openedOffer || openedOffer.id !== id) {
@@ -23,12 +24,12 @@ const Room = ({id, openedOffer, onLoadData, isError}) => {
     }
   }, [id]);
 
-  if (!openedOffer && !isError) {
+  if (!openedOffer && !error) {
     return (
       <LoadingScreen />
     );
   }
-  if (!openedOffer && isError) {
+  if (!openedOffer && error && error.isNotFoundError) {
     return (
       <PageNotFound />
     );
@@ -126,12 +127,12 @@ Room.propTypes = {
   openedOffer: PropTypes.shape(OfferType),
   onLoadData: PropTypes.func.isRequired,
   onAddToBookmarks: PropTypes.func.isRequired,
-  isError: PropTypes.object,
+  error: PropTypes.shape(ErrorType),
 };
 
 const mapStateToProps = ({HOTEL}) => ({
   openedOffer: HOTEL.openedOffer,
-  isError: HOTEL.loadOfferError
+  error: HOTEL.loadOfferError
 });
 
 

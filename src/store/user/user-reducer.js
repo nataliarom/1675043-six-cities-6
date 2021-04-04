@@ -4,6 +4,8 @@ import {UserActionType} from "./action";
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authInfo: null,
+  loginError: null,
+  appError: null,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -18,7 +20,18 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         authInfo: action.payload,
+        loginError: null,
         authorizationStatus: AuthorizationStatus.AUTH
+      };
+    case UserActionType.SET_LOGIN_ERROR:
+      return {
+        ...state,
+        loginError: action.payload
+      };
+    case UserActionType.SET_APPLICATION_ERROR:
+      return {
+        ...state,
+        appError: action.payload
       };
   }
 

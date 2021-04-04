@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import PropTypes from "prop-types";
 import PageHeader from "../page-header/page-header";
-import {checkAuth} from "../../store/user/api-action";
 import {fetchFavoriteHotels} from "../../store/hotel/api-action";
 import {connect} from "react-redux";
 import LoadingScreen from "../loading-screen/loading-screen";
@@ -73,7 +72,6 @@ const mapStateToProps = ({HOTEL, USER}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadData() {
-    dispatch(checkAuth());
     dispatch(fetchFavoriteHotels());
   },
 });

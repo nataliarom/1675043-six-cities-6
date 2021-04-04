@@ -25,6 +25,12 @@ const reviewReducer = (state = initialState, action) => {
         reviewSaved: true,
         reviewError: null
       };
+    case ReviewActionType.CLEAR_RESULT:
+      return {
+        ...state,
+        reviewSaved: false,
+        reviewError: null
+      };
   }
 
   return state;

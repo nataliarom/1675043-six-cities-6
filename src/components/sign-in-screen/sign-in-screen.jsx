@@ -5,9 +5,10 @@ import {connect} from "react-redux";
 import {login} from "../../store/user/api-action";
 import PageHeader from "../page-header/page-header";
 import {AppRoute, AuthorizationStatus} from "../../const";
+import {ErrorType} from "../../types/error-type";
 
 
-const SignInScreen = ({onSubmit, authorizationStatus}) => {
+const SignInScreen = ({onSubmit, authorizationStatus, error}) => {
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -19,7 +20,6 @@ const SignInScreen = ({onSubmit, authorizationStatus}) => {
       password: passwordRef.current.value,
     });
   };
-
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
     return (<Redirect to={AppRoute.ROOT} />);
@@ -53,6 +53,7 @@ const SignInScreen = ({onSubmit, authorizationStatus}) => {
               </div>
               <button className="login__submit form__submit button"
                 type="submit">Sign in</button>
+              {error ? <span style={{color: `red`}}>{error.message}</span> : ``}
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -72,10 +73,12 @@ const SignInScreen = ({onSubmit, authorizationStatus}) => {
 SignInScreen.propTypes = {
   authorizationStatus: PropTypes.oneOf([AuthorizationStatus.NO_AUTH, AuthorizationStatus.AUTH]).isRequired,
   onSubmit: PropTypes.func.isRequired,
+  error: PropTypes.shape(ErrorType),
 };
 
 const mapStateToProps = ({USER}) => ({
   authorizationStatus: USER.authorizationStatus,
+  error: USER.loginError,
 });
 
 const mapDispatchToProps = (dispatch) => ({
