@@ -63,8 +63,9 @@ const hotelReducer = (state = initialState, action) => {
         favoriteOffers: action.payload.isFavorite
           ? [...state.favoriteOffers, action.payload]
           : state.favoriteOffers.filter((offer)=>(offer.id !== action.payload.id)),
-        openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : null,
-        hotels: state.hotels.map((h)=>(h.id === action.payload.id ? action.payload : h)),
+        openedOffer: (state.openedOffer && state.openedOffer.id === action.payload.id) ? action.payload : state.openedOffer,
+        hotels: state.hotels.map((hotel)=>(hotel.id === action.payload.id ? action.payload : hotel)),
+        nearbyOffers: state.nearbyOffers.map((nearbyHotel)=>(nearbyHotel.id === action.payload.id ? action.payload : nearbyHotel)),
       };
     case HotelActionType.SET_OFFER_ERROR:
       return {
